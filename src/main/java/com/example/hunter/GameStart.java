@@ -20,10 +20,6 @@ public class GameStart extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Hunter");
         primaryStage.show();
-
-        // Request focus and set the key event handler
-        root.requestFocus();
-        scene.setOnKeyPressed(gameController::onKeyPressed);
     }
 
     public static void main(String[] args) {

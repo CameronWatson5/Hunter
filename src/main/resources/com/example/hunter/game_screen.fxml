@@ -10,10 +10,13 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hunter.GameController">
     <!-- Game Pane where game action will be displayed -->
-    <Pane fx:id="gamePane" prefHeight="600" prefWidth="800">
-        <ImageView fx:id="characterView" /> <!-- Character ImageView -->
-        <!-- You can add more UI elements related to the game inside this Pane -->
+    <Pane fx:id="gamePane" prefHeight="600" prefWidth="800" focusTraversable="true">
+        <ImageView fx:id="characterView" />
+        <!-- other UI elements -->
     </Pane>
+
+    <!-- You can add more UI elements related to the game inside this Pane -->
+
 
     <!-- Additional UI elements not directly related to the game action can be added here -->
 

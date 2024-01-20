@@ -1,24 +1,47 @@
 package com.example.hunter;
 
+import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 
 public class GameController {
     @FXML
     private ImageView characterView;
-
+    private AnimationTimer gameLoop;
+    @FXML
+    private Pane gamePane;
     private Player player;
     public void initialize() {
-        Image characterImage = new Image(getClass().getResourceAsStream("/images/character.png"));
-        characterView.setImage(characterImage);
-
+        player = new Player(characterView, "/images/character1.png");
+        Platform.runLater(() -> gamePane.requestFocus());
+        gamePane.setOnKeyPressed(this::onKeyPressed);
         // Set initial position, etc.
         characterView.setX(100); // Example position
         characterView.setY(100);
-        player = new Player(characterView);
+        setupGameLoop();
+    }
+
+    private void setupGameLoop() {
+        gameLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                updateGame();
+            }
+        };
+        gameLoop.start();
+    }
+
+    private void updateGame() {
+        // Update game state, check for collisions, etc.
+        // This method is called in each frame
+
+        // Example: update player position
+        // player.update();
     }
 
     public void setPlayer(Player player) {

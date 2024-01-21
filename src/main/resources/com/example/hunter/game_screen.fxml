@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hunter.GameController">
-    <!-- Game Pane where game action will be displayed -->
-    <Pane fx:id="gamePane" prefHeight="600" prefWidth="800" focusTraversable="true">
+<?import javafx.scene.control.Label?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hunter.GameController">
+    <!-- Health Bar Container -->
+    <HBox fx:id="healthBarContainer" alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
+        <ProgressBar fx:id="healthBar" prefWidth="200" prefHeight="20" />
+        <Label fx:id="healthLabel" text="100" /> <!-- Initialize with a default value -->
+    </HBox>
+
+    <!-- Game Pane -->
+    <Pane fx:id="gamePane" prefHeight="600" prefWidth="800" focusTraversable="true" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="30">
         <ImageView fx:id="characterView" />
         <!-- other UI elements -->
     </Pane>
 
-    <!-- You can add more UI elements related to the game inside this Pane -->
+    <!-- Other UI elements can be added here -->
+</AnchorPane>
 
-
-    <!-- Additional UI elements not directly related to the game action can be added here -->
-
-
-</VBox>
 

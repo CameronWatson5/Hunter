@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added character and movement">
+    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added animations">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Enemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hunter/game_screen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hunter/game_screen.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/character.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +67,7 @@
       <workItem from="1705708310239" duration="335000" />
       <workItem from="1705708737433" duration="12000" />
       <workItem from="1705708815009" duration="11523000" />
-      <workItem from="1705775770717" duration="8042000" />
+      <workItem from="1705775770717" duration="33956000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -91,7 +93,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705725164778</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added animations">
+      <option name="closed" value="true" />
+      <created>1705786156434</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705786156434</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -99,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added character and movement" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added character and movement" />
+    <MESSAGE value="Added animations" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added animations" />
   </component>
 </project>

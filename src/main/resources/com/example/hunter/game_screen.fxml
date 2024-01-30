@@ -6,20 +6,21 @@
 <?import javafx.scene.layout.Pane?>
 
 <?import javafx.scene.control.Label?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hunter.GameController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.hunter.GameController" stylesheets="@style.css">
+    <!-- Age Display Label -->
+    <Label fx:id="ageDisplayLabel" layoutX="0" layoutY="10" text="Current Age: Stone Age" styleClass="age-Display-Label"
+           AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" style="-fx-alignment: center;"/>
+    <!-- Score Label -->
+    <Label fx:id="scoreLabel" text="Score: 0" styleClass="score-label" AnchorPane.topAnchor="10" AnchorPane.rightAnchor="10"/>
     <!-- Health Bar Container -->
     <HBox fx:id="healthBarContainer" alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0">
-        <ProgressBar fx:id="healthBar" prefWidth="200" prefHeight="20" />
+        <ProgressBar fx:id="healthBar" prefWidth="200" prefHeight="20" styleClass="health-bar" />
         <Label fx:id="healthLabel" text="100" /> <!-- Initialize with a default value -->
     </HBox>
-
     <!-- Game Pane -->
     <Pane fx:id="gamePane" prefHeight="600" prefWidth="800" focusTraversable="true" AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="30">
         <ImageView fx:id="characterView" />
-        <!-- other UI elements -->
     </Pane>
-
-    <!-- Other UI elements can be added here -->
 </AnchorPane>
 
 

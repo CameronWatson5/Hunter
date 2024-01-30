@@ -1,5 +1,6 @@
 package com.example.hunter;
 
+import com.example.hunter.enemies.Enemy;
 import javafx.animation.PauseTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -8,15 +9,22 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+
 
 import java.io.InputStream;
 import java.util.*;
+import java.util.Random;
+
 
 public class Player {
     private boolean invincible = false;
-    private long invincibilityDuration = 1000; // Invincibility duration in milliseconds
-    private static final int PLAYER_WIDTH = 102; // Example width
-    private static final int PLAYER_HEIGHT = 102; // Example height
+    private Rectangle debugBoundingBox;
+    boolean debugMode = false; // This is used to see the hit boxes of objects
+    private long invincibilityDuration = 1000; // Invincibility duration
+    private static final int PLAYER_WIDTH = 102;
+    private static final int PLAYER_HEIGHT = 102;
 
     private GameController gameController;
     private ImageView characterView;
@@ -26,6 +34,7 @@ public class Player {
     private Image spriteSheetDown;
     private Image spriteSheetLeft;
     private Image spriteSheetRight;
+    private Image weaponSpriteSheet;
     private Direction currentDirection = Direction.STANDING;
     private boolean isAttacking = false;
     private Image attackSpriteSheetUp;
@@ -35,14 +44,16 @@ public class Player {
 
     private Rectangle2D attackArea;
 
-    private int attackDamage = 5;
+    private int attackDamage = 4;
     private double health = 100;
     private double maxHealth = 100;
+    private long lastProjectileTime = 0; // Time when the last projectile was fired
+    private long projectileCooldown = 500; // Cooldown time in milliseconds
+
 
     public void setAttackDamage(int damage) {
         this.attackDamage = damage;
     }
-
     public int getAttackDamage() {
         return this.attackDamage;
     }
@@ -60,7 +71,6 @@ public class Player {
             Platform.runLater(() -> gameController.updateHealthBar());
         }
     }
-
     public Player(ImageView characterView, String imagePath, GameController gameController) {
         this.gameController = gameController;
         this.characterView = Objects.requireNonNull(characterView, "characterView cannot be null");
@@ -74,9 +84,25 @@ public class Player {
         characterView.setImage(image);
         loadSpriteSheets();
         loadAttackSpriteSheets();
+        debugBoundingBox = new Rectangle();
+        debugBoundingBox.setStroke(Color.BLUE);
+        debugBoundingBox.setFill(Color.TRANSPARENT);
+        updateDebugBoundingBox();
         // Load and setup the standing sprite sheet
         setupStandingAnimation();
     }
+
+    private void updateDebugBoundingBox() {
+        if (debugMode) {
+            Rectangle2D boundingBox = getBoundingBox();
+            debugBoundingBox.setX(boundingBox.getMinX());
+            debugBoundingBox.setY(boundingBox.getMinY());
+            debugBoundingBox.setWidth(boundingBox.getWidth());
+            debugBoundingBox.setHeight(boundingBox.getHeight());
+        }
+    }
+
+
     private void loadSpriteSheets(){
         // In the constructor or a dedicated method
         spriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/upWalkSpriteSheet.png")));
@@ -85,45 +111,51 @@ public class Player {
         spriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/rightWalkSpriteSheet.png")));
     }
     private void loadAttackSpriteSheets() {
+        weaponSpriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/swordSpriteSheet.png")));
         attackSpriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackUpSpriteSheet.png")));
         attackSpriteSheetDown = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackDownSpriteSheet.png")));
         attackSpriteSheetLeft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackLeftSpriteSheet.png")));
         attackSpriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackRightSpriteSheet.png")));
     }
     public void fireProjectile() {
-        double directionX = 0;
-        double directionY = 0;
-        double speed = 5; // Example speed
+        long currentTime = System.currentTimeMillis(); // Get the current time
+        if (currentTime - lastProjectileTime >= projectileCooldown) {
 
-        // Calculate the direction of the projectile based on player's current direction
-        switch (currentDirection) {
-            case STANDING, DOWN:
-                directionY = 1;
-                break;
-            case UP:
-                directionY = -1;
-                break;
-            case LEFT:
-                directionX = -1;
-                break;
-            case RIGHT:
-                directionX = 1;
-                break;
+            lastProjectileTime = currentTime; // Update the last projectile time
+
+            double directionX = 0;
+            double directionY = 0;
+            double speed = 5;
+
+            // Calculate the direction of the projectile based on player's current direction
+            switch (currentDirection) {
+                case STANDING, DOWN:
+                    directionY = 1;
+                    break;
+                case UP:
+                    directionY = -1;
+                    break;
+                case LEFT:
+                    directionX = -1;
+                    break;
+                case RIGHT:
+                    directionX = 1;
+                    break;
+            }
+
+            // Create a new projectile
+            int damage = 4;
+            gameController.createRockProjectile(getX(), getY(), directionX, directionY, speed, damage, true);
         }
-
-        // Create a new projectile through GameController
-        gameController.createProjectile(getX(), getY(), directionX, directionY, speed);
     }
-
-
     public void attack() {
         if (!isAttacking) {
             isAttacking = true;
 
             // Store the current direction before attacking
             Direction directionBeforeAttack = currentDirection;
-            double attackWidth = 100; // Width of the attack area
-            double attackHeight = 100; // Height of the attack area
+            double attackWidth = 102; // Width of the attack area
+            double attackHeight = 102; // Height of the attack area
             double offsetX = 0; // X offset from the player's position
             double offsetY = 0; // Y offset from the player's position
 
@@ -149,7 +181,67 @@ public class Player {
             // Initialize the attack area
             attackArea = new Rectangle2D(getX() + offsetX, getY() + offsetY, attackWidth, attackHeight);
 
-            // Setup the attack animation based on the current direction
+            ImageView attackAnimationView = new ImageView(weaponSpriteSheet);
+            final int frameCount = 2;
+            final int frameWidth = 102;
+            final int frameHeight = 102;
+
+            Timeline animationTimeline = new Timeline();
+            for (int i = 0; i < frameCount; i++) {
+                final int frameIndex = i;
+                KeyFrame frame = new KeyFrame(Duration.millis(i * 100), e -> {
+                    // Set the viewport to display the correct frame
+                    attackAnimationView.setViewport(new Rectangle2D(frameIndex * frameWidth, 0, frameWidth, frameHeight));
+                });
+                animationTimeline.getKeyFrames().add(frame);
+            }
+
+            animationTimeline.setOnFinished(e -> gameController.getGamePane().getChildren().remove(attackAnimationView));
+            attackAnimationView.setLayoutX(getX() + offsetX);
+            attackAnimationView.setLayoutY(getY() + offsetY);
+            Random rand = new Random();
+            double UpWeaponAdjustmentY = 0;
+            double DownWeaponAdjustmentY = 0;
+            double RightWeaponAdjustmentX = -30;
+            double LeftWeaponAdjustmentX = 30;
+            switch (currentDirection) {
+                case RIGHT:
+                    offsetX = characterView.getBoundsInParent().getWidth() - RightWeaponAdjustmentX;
+
+                    int angleRight = 80 + rand.nextInt(41);
+                    attackAnimationView.setScaleX(1);
+                    attackAnimationView.setRotate(angleRight);
+                    break;
+                case LEFT:
+                    offsetX = characterView.getBoundsInParent().getWidth() - LeftWeaponAdjustmentX;
+                    int angleLeft = 260 + rand.nextInt(41);
+                    attackAnimationView.setScaleX(-1);
+                    attackAnimationView.setRotate(angleLeft);
+                    break;
+                case UP:
+                    int angleUp = rand.nextInt(41);
+                    attackAnimationView.setScaleX(1);
+                    attackAnimationView.setRotate(angleUp);
+                    break;
+                case DOWN:
+                    int angleDown = rand.nextInt(41);
+                    attackAnimationView.setScaleY(-1);
+                    attackAnimationView.setRotate(angleDown);
+                    break;
+            }
+
+            gameController.getGamePane().getChildren().add(attackAnimationView);
+            animationTimeline.play();
+
+            if (debugMode) {
+                Rectangle hitboxVisual = new Rectangle(attackArea.getMinX(), attackArea.getMinY(), attackArea.getWidth(), attackArea.getHeight());
+                hitboxVisual.setStroke(Color.RED);
+                hitboxVisual.setFill(new Color(1, 0, 0, 0.3));
+
+                gameController.getGamePane().getChildren().add(hitboxVisual);
+
+                new Timeline(new KeyFrame(Duration.millis(50), e -> gameController.getGamePane().getChildren().remove(hitboxVisual))).play();
+            }
             switch (currentDirection) {
                 case RIGHT:
                     setupAnimation(attackSpriteSheetRight, 2, Duration.millis(100), false);
@@ -167,19 +259,17 @@ public class Player {
             ArrayList<Enemy> enemies = gameController.getEnemies();
             for (Enemy enemy : gameController.getEnemies()) {
                 if (attackArea.intersects(enemy.getBoundingBox())) {
-                    enemy.receiveDamage(attackDamage);
-                    System.out.println("Enemy hit!");
+                    enemy.receiveDamage(attackDamage, this);
+                    //System.out.println("Enemy hit!");
                 }
             }
-            // Timer to end the attack and return to the previous walking animation
             new Timeline(new KeyFrame(Duration.millis(300), e -> {
-                // Stop the attack animation
+                gameController.getGamePane().getChildren().remove(attackAnimationView);
+
                 timeline.stop();
 
-                // Reset the attacking state
                 isAttacking = false;
 
-                // Transition back to the appropriate animation based on direction and movement
                 if (directionBeforeAttack != Direction.STANDING) {
                     switch (directionBeforeAttack) {
                         case RIGHT:
@@ -201,13 +291,10 @@ public class Player {
             })).play();
         }
     }
-
-
-
     private void transitionToNextAnimation() {
         System.out.println("Transitioning animation. Current direction: " + currentDirection + ", Attacking: " + isAttacking);
         if (isAttacking) {
-            isAttacking = false; // Reset the attacking state
+            isAttacking = false;
             switch (currentDirection) {
                 case RIGHT:
                     walkRight();
@@ -235,11 +322,11 @@ public class Player {
         Image standingSpriteSheet = new Image(stream);
 
         final int numberOfFrames = 2;
-        final Duration frameTime = Duration.millis(200); // Time per frame
+        final Duration frameTime = Duration.millis(200);
 
         setupAnimation(standingSpriteSheet, numberOfFrames, frameTime, true);
     }
-    public void move(int dx, int dy) {
+    public void move(double dx, double dy) {
         if (dx > 0) {
             walkRight();
         } else if (dx < 0) {
@@ -250,8 +337,10 @@ public class Player {
             walkUp();
         }
 
+
         characterView.setX(characterView.getX() + dx);
         characterView.setY(characterView.getY() + dy);
+        updateDebugBoundingBox();
     }
 
     private void walkUp() {
@@ -302,7 +391,6 @@ public class Player {
         characterView.setImage(spriteSheet);
         characterView.setViewport(new Rectangle2D(0, 0, 102, 102));
 
-        // If a timeline is already running, stop it before starting a new one
         if (timeline != null) {
             timeline.stop();
         }
@@ -310,8 +398,8 @@ public class Player {
         timeline = new Timeline(new KeyFrame(frameTime, e -> {
             int currentIndex = (int) (characterView.getViewport().getMinX() / 102) + 1;
             if (currentIndex >= numberOfFrames) currentIndex = 0;
-            int column = currentIndex % 2; // Assuming 2 columns, adjust as necessary
-            int row = currentIndex / 2; // Assuming 2 rows, adjust as necessary
+            int column = currentIndex % 2;
+            int row = currentIndex / 2;
             characterView.setViewport(new Rectangle2D(column * 102, row * 102, 102, 102));
         }));
 
@@ -323,8 +411,8 @@ public class Player {
         timeline.play();
     }
     public Rectangle2D getBoundingBox() {
-        // Define a reduction factor if the bounding box should be smaller than the sprite
-        double reductionFactor = 0.5;
+        // reduction factor
+        double reductionFactor = 0.2;
         double reducedWidth = PLAYER_WIDTH * reductionFactor;
         double reducedHeight = PLAYER_HEIGHT * reductionFactor;
 
@@ -337,18 +425,29 @@ public class Player {
     public double getX() {
         return characterView.getX();
     }
-
     public double getY() {
         return characterView.getY();
     }
-
     public double getHealth() {
         return health;
     }
-
     public double getMaxHealth() {
         return maxHealth;
     }
+    public void setHealth(double maxHealth) {
+        health = maxHealth;
+    }
+    public void setX(int x) {
+        characterView.setX(x);
+    }
+    public void setY(int y) {
+        characterView.setY(y);
+    }
+
+    public Rectangle getDebugBoundingBox() {
+        return debugBoundingBox;
+    }
+
 
     private enum Direction {
             UP, DOWN, LEFT, RIGHT, STANDING
@@ -360,5 +459,4 @@ public class Player {
             setupStandingAnimation();
         }
     }
-        // ... rest of your code ...
-    }
+}

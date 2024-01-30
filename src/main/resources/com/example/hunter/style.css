@@ -1,0 +1,26 @@
+
+.score-label {
+    -fx-font-family: "Impact";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+/* Health Bar Style */
+.health-bar {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0); /* Shadow effect */
+}
+.age-Display-Label{
+    -fx-font-family: "Impact";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+.health-bar .bar {
+    -fx-background-color: linear-gradient(to right, darkred, red); /* Gradient fill */
+    -fx-background-radius: 1; /* Rounded corners */
+    -fx-border-radius: 1; /* Rounded corners for border */
+}
+
+.health-value-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+}

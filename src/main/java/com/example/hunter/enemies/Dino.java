@@ -100,9 +100,7 @@ public class Dino extends Enemy {
 
     @Override
     public void receiveDamage(int damage, Player player) {
-        System.out.println("Enemy received damage: " + damage);
         health -= damage;
-        System.out.println("Enemy health after damage: " + this.health);
         if (health <= 0) {
             markForRemoval();
         } else {

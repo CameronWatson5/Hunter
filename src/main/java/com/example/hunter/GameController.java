@@ -739,9 +739,9 @@ public class GameController {
             case CLASSICAL_AGE:
                 return score >= 60; // Spawn boss at score 40 in Classical Age
             case MEDIEVAL_AGE:
-                return score >= 100; // Spawn boss at score 60 in Medieval Age
+                return score >= 90; // Spawn boss at score 60 in Medieval Age
             case MODERN_AGE:
-                return score >= 140; // Spawn boss at score 80 in Modern Age
+                return score >= 130; // Spawn boss at score 80 in Modern Age
             case FUTURE_AGE:
                 return score >= 180; // Spawn boss at score 100 in Future Age
             default:

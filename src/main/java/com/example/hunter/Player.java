@@ -50,13 +50,6 @@ public class Player {
     private long lastProjectileTime = 0; // Time when the last projectile was fired
     private long projectileCooldown = 500; // Cooldown time in milliseconds
 
-
-    public void setAttackDamage(int damage) {
-        this.attackDamage = damage;
-    }
-    public int getAttackDamage() {
-        return this.attackDamage;
-    }
     public void receiveDamage(int damage) {
         if (!invincible) {
             health -= damage;

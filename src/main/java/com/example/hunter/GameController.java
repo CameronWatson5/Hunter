@@ -41,12 +41,11 @@ public class GameController {
     @FXML
     private Label ageDisplayLabel;
     private long lastSpawnTime = 0;
-    private long spawnInterval = 1000; // spawn
+    private final long spawnInterval = 1000; // spawn
     private Player player;
-    private ArrayList<Projectile> projectiles = new ArrayList<>();
+    private final ArrayList<Projectile> projectiles = new ArrayList<>();
     private int score = 0;
     private Age currentAge;
-    private boolean gameOverPending = false;
     private boolean bossDefeated;
     private boolean isGameOver = false;
     private static GameState gameState; // An enum for game states
@@ -56,8 +55,6 @@ public class GameController {
     private int initialPlayerY = 400;
     private boolean debugMode = true;
     private List<ScoreEntry> scoreList = new ArrayList<>();
-    private boolean bigDinoDead = false;
-    private boolean zeusDead = false;
     private boolean bossSpawned;
     private Scene scene;
     private Set<KeyCode> keysPressed = new HashSet<>();
@@ -280,10 +277,10 @@ public class GameController {
         ArrayList<Enemy> toRemove = new ArrayList<>();
         if (player.getHealth() <= 0 && gameState == GameState.PLAYING) {
             gameState = GameState.GAME_OVER;
-            Platform.runLater(() -> showGameOverPopup());
+            Platform.runLater(this::showGameOverPopup);
         }
         if (isGameOver) {
-            Platform.runLater(() -> showGameOverPopup());
+            Platform.runLater(this::showGameOverPopup);
             isGameOver = false;
         }
 
@@ -482,6 +479,7 @@ public class GameController {
     }
 
     private void resetGame() {
+        keysPressed.clear();
         bossSpawned = false;
         bossDefeated = false;
         for (Enemy enemy : enemies) {

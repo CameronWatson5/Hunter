@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +27,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/target/classes/com/example/hunter/GameStart.class" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -69,7 +70,7 @@
   <component name="RunManager">
     <configuration name="GameStart" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.hunter.GameStart" />
-      <module name="Dino!Dino!Dino!" />
+      <module name="Hunter" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.example.hunter.enemies.*" />
@@ -102,6 +103,7 @@
       <workItem from="1706300014667" duration="1044000" />
       <workItem from="1706342912455" duration="30818000" />
       <workItem from="1706582386401" duration="2161000" />
+      <workItem from="1706658807838" duration="872000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -159,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706581957079</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1706658872608</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706658872608</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

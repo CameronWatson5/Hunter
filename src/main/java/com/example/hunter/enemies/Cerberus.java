@@ -1,3 +1,9 @@
+/*
+This is the Cerberus class, it is a subclass of the Boss abstract class,
+which itself is a subclass of the abstract enemy superclass.
+The Cerberus appears in the Classical Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

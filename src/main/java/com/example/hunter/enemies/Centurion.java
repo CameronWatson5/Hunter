@@ -1,3 +1,8 @@
+/*
+This is the Centurion class, it is a subclass of the Enemy abstract superclass.
+The Centurion appears in the Classical Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

@@ -1,3 +1,8 @@
+/*
+This is the player class. Player movement is handled here, as well as
+animations, and attacking.
+ */
+
 package com.example.hunter;
 
 import com.example.hunter.enemies.Enemy;
@@ -16,7 +21,6 @@ import javafx.scene.paint.Color;
 import java.io.InputStream;
 import java.util.*;
 import java.util.Random;
-
 
 public class Player {
     private boolean invincible = false;
@@ -94,8 +98,6 @@ public class Player {
             debugBoundingBox.setHeight(boundingBox.getHeight());
         }
     }
-
-
     private void loadSpriteSheets(){
         // In the constructor or a dedicated method
         spriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/upWalkSpriteSheet.png")));
@@ -329,8 +331,6 @@ public class Player {
         } else if (dy < 0) {
             walkUp();
         }
-
-
         characterView.setX(characterView.getX() + dx);
         characterView.setY(characterView.getY() + dy);
         updateDebugBoundingBox();

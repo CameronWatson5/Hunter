@@ -1,3 +1,11 @@
+/*
+This is the Tank class, it is a subclass of the Boss abstract class,
+which itself is a subclass of the abstract enemy superclass.
+The Tank appears in the Modern Age.
+This class has the ability to fire projectiles.
+This class used the Rocket class to fire projectiles.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

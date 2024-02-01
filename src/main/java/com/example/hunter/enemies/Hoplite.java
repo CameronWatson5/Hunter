@@ -1,3 +1,8 @@
+/*
+This is the Hoplite class, it is a subclass of the Enemy abstract superclass.
+The Hoplite appears in the Classical Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

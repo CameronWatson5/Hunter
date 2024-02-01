@@ -1,3 +1,9 @@
+/*
+This is the Bullet class, it is a subclass of the Projectile superclass.
+The Arrow is used by the Soldier class.
+*/
+
+
 package com.example.hunter.projectiles;
 
 import com.example.hunter.projectiles.Projectile;

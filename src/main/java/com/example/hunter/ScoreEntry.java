@@ -1,3 +1,9 @@
+/*
+This is the score entry class. It is responsible for
+keeping track of the user's best 10 scores and listing them from
+highest to lowest.
+*/
+
 package com.example.hunter;
 
 import java.util.Arrays;
@@ -48,5 +54,3 @@ public class ScoreEntry implements Comparable<ScoreEntry> {
                 .collect(Collectors.toList());
     }
 }
-
-

@@ -1,3 +1,8 @@
+/*
+This is the Knight class, it is a subclass of the Enemy abstract superclass.
+The Knight appears in the Medieval Age.
+*/
+
 package com.example.hunter.enemies;
 
 

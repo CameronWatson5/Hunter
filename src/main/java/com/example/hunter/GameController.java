@@ -1,3 +1,20 @@
+/*
+This is the GameController class, and it has a large part of the game's logic within it.
+This class is responsible for:
+- Initializing and resetting the game.
+- spawning enemies
+- removing enemies
+- spawning projectiles
+- removing projectiles
+- keeping track of the score
+- the game loop and updating the game
+- the current age and the transition to the next age
+- updating the user interface
+- the difficulty and the amount of damage the player receives based on the difficulty
+- the game over pop up
+- boss logic
+ */
+
 package com.example.hunter;
 
 import com.example.hunter.enemies.*;
@@ -55,10 +72,52 @@ public class GameController {
     private int initialPlayerY = 400;
     private boolean debugMode = true;
     private List<ScoreEntry> scoreList = new ArrayList<>();
+
     private boolean bossSpawned;
+    private long lastPauseTime = 0;
     private Scene scene;
     private Set<KeyCode> keysPressed = new HashSet<>();
+    public void initialize() {
+        bossSpawned = false;
+        bossDefeated = false;
+        score = 0;
+        this.currentAge = Age.STONE_AGE; // Start at Stone Age
+        try {
+            URL imageUrl = getClass().getResource("/images/stoneAgeBackground.png");
+            if (imageUrl == null) {
+                System.out.println("Background image URL is null. Image not found.");
+            } else {
+                Image backgroundImage = new Image(imageUrl.toExternalForm());
+                BackgroundImage bgImage = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+                Background background = new Background(bgImage);
+                gamePane.setBackground(background);
+            }
+        } catch (Exception e) {
+            System.out.println("Error loading background image: " + e.getMessage());
+            e.printStackTrace();
+        }
+        gameState = GameState.PLAYING;
+        updateScoreDisplay();
+        enemies = new ArrayList<>();
+        player = new Player(characterView, "/images/character1.png", this);
 
+        if (!gamePane.getChildren().contains(characterView)) {
+            gamePane.getChildren().add(characterView);
+        }
+        if (debugMode && !gamePane.getChildren().contains(player.getDebugBoundingBox())) {
+            gamePane.getChildren().add(player.getDebugBoundingBox());
+        }
+
+        Platform.runLater(() -> gamePane.requestFocus());
+        gamePane.setOnKeyPressed(this::onKeyPressed);
+        updateHealthBar();
+        characterView.setX(initialPlayerX);
+        characterView.setY(initialPlayerY);
+
+        scoreList = ScoreEntry.loadScores();
+        gamePane.setFocusTraversable(true);
+        gamePane.requestFocus();
+    }
     public void setScene(Scene scene) {
         this.scene = scene; // Set the Scene in your GameController
     }
@@ -174,46 +233,7 @@ public class GameController {
         enemies.remove(enemy);
         gamePane.getChildren().remove(enemy.getImageView());
     }
-    public void initialize() {
-        bossSpawned = false;
-        bossDefeated = false;
-        score = 0;
-        this.currentAge = Age.STONE_AGE; // Start at Stone Age
-        try {
-            URL imageUrl = getClass().getResource("/images/stoneAgeBackground.png");
-            if (imageUrl == null) {
-                System.out.println("Background image URL is null. Image not found.");
-            } else {
-                Image backgroundImage = new Image(imageUrl.toExternalForm());
-                BackgroundImage bgImage = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-                Background background = new Background(bgImage);
-                gamePane.setBackground(background);
-            }
-        } catch (Exception e) {
-            System.out.println("Error loading background image: " + e.getMessage());
-            e.printStackTrace();
-        }
-        gameState = GameState.PLAYING;
-        updateScoreDisplay();
-        enemies = new ArrayList<>();
-        player = new Player(characterView, "/images/character1.png", this);
 
-        if (!gamePane.getChildren().contains(characterView)) {
-            gamePane.getChildren().add(characterView);
-        }
-        if (debugMode && !gamePane.getChildren().contains(player.getDebugBoundingBox())) {
-            gamePane.getChildren().add(player.getDebugBoundingBox());
-        }
-
-        Platform.runLater(() -> gamePane.requestFocus());
-        gamePane.setOnKeyPressed(this::onKeyPressed);
-        updateHealthBar();
-        characterView.setX(initialPlayerX);
-        characterView.setY(initialPlayerY);
-
-        scoreList = ScoreEntry.loadScores();
-
-    }
 
     public void createRockProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
 
@@ -236,15 +256,19 @@ public class GameController {
         gameLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                if (now - lastSpawnTime >= spawnInterval * 1_000_000) {
-                    spawnEnemy();
-                    lastSpawnTime = now;
+                //System.out.println("GameLoop running"); // This will print continuously when the game loop is running
+                if (gameState != GameState.PAUSED) {
+                    if (now - lastSpawnTime >= spawnInterval * 1_000_000) {
+                        spawnEnemy();
+                        lastSpawnTime = now;
+                    }
+                    updateGame();
                 }
-                updateGame();
             }
         };
         gameLoop.start();
     }
+
 
     private void updateScoreDisplay() {
         Platform.runLater(() -> {
@@ -253,6 +277,9 @@ public class GameController {
     }
 
     private void updateGame() {
+        if (gameState == GameState.PAUSED) {
+            return;
+        }
 
         if (gameState == GameState.GAME_OVER) {
             return;
@@ -373,16 +400,43 @@ public class GameController {
     }
 
     public void onKeyPressed(KeyEvent keyEvent) {
-        keysPressed.add(keyEvent.getCode());
-        updateMovement();
+        System.out.println("Key Pressed: " + keyEvent.getCode()); // Add this line
+        if (keyEvent.getCode() == KeyCode.Q) {
+            togglePauseState();
+        } else {
+            keysPressed.add(keyEvent.getCode());
+            updateMovement();
+        }
     }
+    private void togglePauseState() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastPauseTime < 500) { // 500 milliseconds threshold
+            return; // Ignore the toggle request if it's too soon
+        }
+        lastPauseTime = currentTime;
 
+        System.out.println("Current GameState before toggling: " + gameState);
+        if (gameState == GameState.PLAYING) {
+            gameState = GameState.PAUSED;
+            gameLoop.stop(); // Stop the game loop
+            System.out.println("Game Paused");
+        } else if (gameState == GameState.PAUSED) {
+            gameState = GameState.PLAYING;
+            gameLoop.start(); // Start the game loop
+            gamePane.requestFocus(); // Ensure gamePane has focus
+            System.out.println("Game Resumed");
+        }
+        System.out.println("Current GameState after toggling: " + gameState);
+    }
     public void onKeyReleased(KeyEvent keyEvent) {
         keysPressed.remove(keyEvent.getCode());
         updateMovement();
     }
 
     private void updateMovement() {
+        if (gameState == GameState.PAUSED) {
+            return; // Ignore movement commands if the game is paused
+        }
         if (player == null) return;
 
         double deltaX = 0;
@@ -576,7 +630,9 @@ public class GameController {
 
     public enum GameState {
         PLAYING,
+        PAUSED,
         GAME_OVER;
+
 
         public double getCharacterX() {
             return gameState.getCharacterX();
@@ -626,9 +682,9 @@ public class GameController {
         return;}
         Age newAge = currentAge;
 
-        if (score >= 80) {
+        if (score >= 200) {
             newAge = Age.FUTURE_AGE;
-        } else if (score >= 60) {
+        } else if (score >= 120) {
             newAge = Age.MODERN_AGE;
         } else if (score >= 40) {
             newAge = Age.MEDIEVAL_AGE;
@@ -805,7 +861,7 @@ public class GameController {
             case CLASSICAL_AGE:
                 return new Cerberus(x,y,5,20, this);
             case MEDIEVAL_AGE:
-                return new Bunny(x,y,10,20, this);
+                return new Bunny(x,y,10,10, this);
             case MODERN_AGE:
                 return new Tank(x,y,2,40, this);
             case FUTURE_AGE:

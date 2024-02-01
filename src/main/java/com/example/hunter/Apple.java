@@ -1,3 +1,9 @@
+/*
+This is the Apple class, it is randomly dropped when an enemy object dies.
+If the player collides with the apple, then the player gains 10 health points.
+*/
+
+
 package com.example.hunter;
 
 import javafx.animation.PauseTransition;

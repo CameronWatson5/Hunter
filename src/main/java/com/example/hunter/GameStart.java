@@ -1,3 +1,9 @@
+/*
+This is the main method. The game starts here.
+When this file is run, a start game pop up should appear.
+This allows the user to select a difficulty and begin the game.
+*/
+
 package com.example.hunter;
 
 import javafx.application.Application;

@@ -6,8 +6,33 @@
   <component name="ChangeListManager">
     <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Initial Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Bunny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Bunny.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Centurion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Centurion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Cerberus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Cerberus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Enemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Gladiator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Gladiator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Hoplite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Hoplite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/hunter/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/hunter/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +129,10 @@
       <workItem from="1706342912455" duration="30818000" />
       <workItem from="1706582386401" duration="2161000" />
       <workItem from="1706658807838" duration="872000" />
+      <workItem from="1706664369988" duration="1077000" />
+      <workItem from="1706702769875" duration="1145000" />
+      <workItem from="1706704016431" duration="2532000" />
+      <workItem from="1706829256054" duration="1882000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -169,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706658872608</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Initial Commit">
+      <option name="closed" value="true" />
+      <created>1706664412293</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706664412293</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,3 +1,8 @@
+/*
+This is the Enemy abstract superclass.
+This class has the all the game's bosses and enemies as subclasses of it.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

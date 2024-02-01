@@ -1,3 +1,8 @@
+/*
+This is the Police class, it is a subclass of the Enemy abstract superclass.
+The Police appear in the Modern Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

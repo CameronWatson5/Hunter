@@ -1,3 +1,9 @@
+/*
+This is the Projectile superclass.
+This class is used both by enemy objects and the player object to fire
+projectiles.
+*/
+
 package com.example.hunter.projectiles;
 
 import javafx.geometry.Rectangle2D;

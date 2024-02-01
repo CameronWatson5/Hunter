@@ -1,3 +1,9 @@
+/*
+This is the Bunny class, it is a subclass of the Boss abstract class,
+which itself is a subclass of the abstract enemy superclass.
+The Bunny appears in the Medieval Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

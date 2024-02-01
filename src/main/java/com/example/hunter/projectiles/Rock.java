@@ -1,3 +1,8 @@
+/*
+This is the Rock class, it is a subclass of the Projectile superclass.
+The Rock is used by the Player class.
+*/
+
 package com.example.hunter.projectiles;
 
 import com.example.hunter.projectiles.Projectile;

@@ -1,3 +1,9 @@
+/*
+This is the Rocket class, it is a subclass of the Projectile superclass.
+The Rocket is used by the Tank class.
+*/
+
+
 package com.example.hunter.projectiles;
 
 import com.example.hunter.projectiles.Projectile;

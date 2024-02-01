@@ -1,3 +1,9 @@
+/*
+This is the BigDino class, it is a subclass of the Boss abstract class,
+which itself is a subclass of the abstract enemy superclass.
+The BigDino appears in the Stone Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

@@ -1,3 +1,10 @@
+/*
+This is the Archer class, it is a subclass of the Enemy abstract superclass.
+The Archer appears in the Medieval Age.
+This class has the ability to fire projectiles.
+This class used the Arrow class to fire projectiles.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

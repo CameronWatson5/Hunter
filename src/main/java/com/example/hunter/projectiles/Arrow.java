@@ -1,3 +1,8 @@
+/*
+This is the Arrow class, it is a subclass of the Projectile superclass.
+The Arrow is used by the Archer class.
+*/
+
 package com.example.hunter.projectiles;
 
 import com.example.hunter.projectiles.Projectile;

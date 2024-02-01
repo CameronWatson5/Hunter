@@ -1,3 +1,8 @@
+/*
+This is the Peasant class, it is a subclass of the Enemy abstract superclass.
+The Peasant appears in the Medieval Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

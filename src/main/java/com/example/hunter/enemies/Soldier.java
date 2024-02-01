@@ -1,3 +1,10 @@
+/*
+This is the Soldier class, it is a subclass of the Enemy abstract superclass.
+The Soldier appears in the Modern Age.
+This class has the ability to fire projectiles.
+This class used the Bullet class to fire projectiles.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;

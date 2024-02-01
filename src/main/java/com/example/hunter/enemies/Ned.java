@@ -1,3 +1,8 @@
+/*
+This is the Ned class, it is a subclass of the Enemy abstract superclass.
+The Ned appears in the Modern Age.
+*/
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

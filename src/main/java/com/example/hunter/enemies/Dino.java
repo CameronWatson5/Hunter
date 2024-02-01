@@ -1,3 +1,11 @@
+/*
+This is the Dino class, it is a subclass of the Enemy abstract superclass.
+The Dino appears in the Stone Age.
+The Dino class is unique from other enemies, as when it is constructed,
+it will randomly select a spriteSheet to use.
+*/
+
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;

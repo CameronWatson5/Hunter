@@ -42,41 +42,41 @@ import javafx.stage.Stage;
 
 public class GameController {
     @FXML
-    private ProgressBar healthBar;
+    private ProgressBar healthBar; // UI
     @FXML
-    private Label healthLabel;
+    private Label healthLabel; // UI
     @FXML
-    private Label scoreLabel;
-    private Difficulty currentDifficulty = Difficulty.MEDIUM;
+    private Label scoreLabel; // UI
+    private Difficulty currentDifficulty = Difficulty.MEDIUM; // Default difficulty
 
     @FXML
-    private ImageView characterView;
-    private ArrayList<Enemy> enemies;
+    private ImageView characterView; // display
+    private ArrayList<Enemy> enemies; // ArrayList of enemies
     private AnimationTimer gameLoop;
     @FXML
-    private Pane gamePane;
+    private Pane gamePane; // visual display
     @FXML
-    private Label ageDisplayLabel;
-    private long lastSpawnTime = 0;
+    private Label ageDisplayLabel; // UI
+    private long lastSpawnTime = 0; // used during spawn
     private final long spawnInterval = 1000; // spawn
     private Player player;
     private final ArrayList<Projectile> projectiles = new ArrayList<>();
-    private int score = 0;
+    private int score = 0; // scores begins at 0 and is reset when game is reset
     private Age currentAge;
     private boolean bossDefeated;
     private boolean isGameOver = false;
     private static GameState gameState; // An enum for game states
-    private List<Apple> apples = new ArrayList<>();
+    private List<Apple> apples = new ArrayList<>(); // used for apple objects.
 
     private int initialPlayerX = 400;
     private int initialPlayerY = 400;
-    private boolean debugMode = true;
+    private boolean debugMode = false;
     private List<ScoreEntry> scoreList = new ArrayList<>();
 
     private boolean bossSpawned;
     private long lastPauseTime = 0;
     private Scene scene;
-    private Set<KeyCode> keysPressed = new HashSet<>();
+    private Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is used so multiple buttons can be pressed
     public void initialize() {
         bossSpawned = false;
         bossDefeated = false;
@@ -166,7 +166,7 @@ public class GameController {
                     enemy = new Hoplite(x, y, 0.8, 12, gamePane.getWidth(), gamePane.getHeight());
                     break;
                 case 2:
-                    enemy = new Centurion(x, y, 0.5, 50);
+                    enemy = new Centurion(x, y, 0.5, 16);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected enemy type: " + enemyType);
@@ -193,7 +193,7 @@ public class GameController {
                     enemy = new Soldier(x, y, 1, 4, this);
                     break;
                 case 1:
-                    enemy = new Police(x, y, 0.5, 50);
+                    enemy = new Police(x, y, 0.5, 16);
                     break;
                 case 2:
                     enemy = new Ned(x, y, 3.5, 8);
@@ -201,8 +201,23 @@ public class GameController {
                 default:
                     throw new IllegalStateException("Unexpected enemy type: " + enemyType);
             }
+        } else if (currentAge == Age.FUTURE_AGE) {
+            int enemyType = random.nextInt(3); // Random number between 0 and 2
+            switch (enemyType) {
+                case 0:
+                    enemy = new SuperSoldier(x, y, 2, 12, this);
+                    break;
+                case 1:
+                    enemy = new Dino(x, y, 3, 12);
+                    break;
+                case 2:
+                    enemy = new Robot(x, y, 4, 40);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected enemy type: " + enemyType);
+            }
         }else {
-            enemy = new Dino(x, y, 1, 2); // For ages other than CLASSICAL_AGE
+            enemy = new Dino(x, y, 1, 2);
         }
         if (isTimeForBoss() && !bossSpawned) {
             Enemy boss = selectBossForCurrentAge();
@@ -269,7 +284,6 @@ public class GameController {
         gameLoop.start();
     }
 
-
     private void updateScoreDisplay() {
         Platform.runLater(() -> {
             scoreLabel.setText("Score: " + score);
@@ -331,7 +345,6 @@ public class GameController {
             updateScoreDisplay();
             removeEnemy(enemy);
         }
-        // Handle projectiles
         ArrayList<Projectile> projectilesToRemove = new ArrayList<>();
 
         for (Projectile projectile : projectiles) {
@@ -355,18 +368,15 @@ public class GameController {
                     }
                 }
             }
-
             // Check if projectile is out of bounds
             if (isOutOfBounds(projectile)) {
                 projectilesToRemove.add(projectile);
             }
         }
-
         // Remove projectiles that are marked for removal
         projectiles.removeAll(projectilesToRemove);
         for (Projectile projectile : projectilesToRemove) {
             gamePane.getChildren().remove(projectile.getView());
-
         }
         if (bossDefeated) {
             transitionToNextAge();
@@ -376,7 +386,6 @@ public class GameController {
         projectiles.removeAll(projectilesToRemove);
         projectilesToRemove.forEach(projectile -> gamePane.getChildren().remove(projectile.getView()));
     }
-
     private void checkCollisionWithPlayer(Enemy enemy) {
         int damage;
         switch (currentDifficulty) {
@@ -393,14 +402,12 @@ public class GameController {
             player.receiveDamage(damage);
         }
     }
-
-
     public void setPlayer(Player player) {
         this.player = player;
     }
 
     public void onKeyPressed(KeyEvent keyEvent) {
-        System.out.println("Key Pressed: " + keyEvent.getCode()); // Add this line
+        //System.out.println("Key Pressed: " + keyEvent.getCode());
         if (keyEvent.getCode() == KeyCode.Q) {
             togglePauseState();
         } else {
@@ -411,7 +418,7 @@ public class GameController {
     private void togglePauseState() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastPauseTime < 500) { // 500 milliseconds threshold
-            return; // Ignore the toggle request if it's too soon
+            return;
         }
         lastPauseTime = currentTime;
 
@@ -464,7 +471,6 @@ public class GameController {
             player.fireProjectile();
         }
     }
-
     void updateHealthBar() {
         if (player != null) {
             double healthPercentage = (double) player.getHealth() / player.getMaxHealth();
@@ -473,15 +479,10 @@ public class GameController {
         }
     }
 
-    public void onPlayerHealthChanged() {
-        updateHealthBar();
-    }
-
     private void endGame() {
         if (gameState != GameState.GAME_OVER) {
             gameState = GameState.GAME_OVER;
             promptForPlayerName(score);
-
         }
     }
 
@@ -566,8 +567,6 @@ public class GameController {
     public void onDifficultySelected(GameController.Difficulty selectedDifficulty) {
         setCurrentDifficulty(selectedDifficulty);
     }
-    public void handleButtonClick(ActionEvent actionEvent) {
-    }
 
     private boolean isOutOfBounds(Projectile projectile) {
         double x = projectile.getX();
@@ -607,15 +606,21 @@ public class GameController {
     }
 
     public void createBulletProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
-        {
             Projectile projectile = new Bullet(x, y, directionX, directionY, speed, damage, firedByPlayer);
             this.projectiles.add(projectile);
             addProjectileToGame(projectile);
-        }
     }
 
     public void createRocketProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
         Projectile projectile = new Rocket(x, y, directionX, directionY, speed, damage, firedByPlayer);
+        this.projectiles.add(projectile);
+        addProjectileToGame(projectile);
+    }
+
+    public void createLaserProjectile(double x, double y, double directionX, double directionY, double projectileSpeed, int damage, boolean b) {
+        double speed = 8;
+        boolean firedByPlayer = false;
+        Projectile projectile = new Bullet(x, y, directionX, directionY, speed, damage, firedByPlayer);
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
@@ -789,15 +794,15 @@ public class GameController {
         // Spawn boss based on score thresholds and current age
         switch (currentAge) {
             case STONE_AGE:
-                return score >= 20; // Spawn boss at score 20 in Stone Age
+                return score >= 20;
             case CLASSICAL_AGE:
-                return score >= 60; // Spawn boss at score 40 in Classical Age
+                return score >= 40;
             case MEDIEVAL_AGE:
-                return score >= 90; // Spawn boss at score 60 in Medieval Age
+                return score >= 120;
             case MODERN_AGE:
-                return score >= 130; // Spawn boss at score 80 in Modern Age
+                return score >= 200;
             case FUTURE_AGE:
-                return score >= 180; // Spawn boss at score 100 in Future Age
+                return score >= 220;
             default:
                 return false;
         }
@@ -808,28 +813,6 @@ public class GameController {
         updateAge();
         changeGameElementsForAge();
         bossSpawned = false;
-    }
-
-    private Age getNextAge() {
-        if (currentAge == Age.STONE_AGE) {
-            Age nextAge = Age.CLASSICAL_AGE;
-            return nextAge;
-        }
-        else if (currentAge == Age.CLASSICAL_AGE) {
-            Age nextAge = Age.MEDIEVAL_AGE;
-            return nextAge;
-        }
-        else if (currentAge == Age.MEDIEVAL_AGE) {
-            Age nextAge = Age.MODERN_AGE;
-            return nextAge;
-        }
-        else if (currentAge == Age.MODERN_AGE) {
-            Age nextAge = Age.FUTURE_AGE;
-            return nextAge;
-        }
-
-
-        return null;
     }
     private Enemy selectBossForCurrentAge() {
         double x, y;
@@ -861,11 +844,11 @@ public class GameController {
             case CLASSICAL_AGE:
                 return new Cerberus(x,y,5,20, this);
             case MEDIEVAL_AGE:
-                return new Bunny(x,y,10,10, this);
+                return new Bunny(x,y,10,20, this);
             case MODERN_AGE:
                 return new Tank(x,y,2,40, this);
             case FUTURE_AGE:
-                return new BigDino(x,y,2,20, this);
+                return new Alien(x,y,2,100, this);
             default:
                 throw new IllegalStateException("Unknown Age: " + currentAge);
         }

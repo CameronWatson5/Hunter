@@ -3,7 +3,6 @@ This is the Apple class, it is randomly dropped when an enemy object dies.
 If the player collides with the apple, then the player gains 10 health points.
 */
 
-
 package com.example.hunter;
 
 import javafx.animation.PauseTransition;
@@ -16,7 +15,7 @@ import javafx.util.Duration;
 
 public class Apple {
     private double x, y;
-    private Rectangle boundingBox;
+    private Rectangle boundingBox; // used for collision
     private ImageView imageView;
     private Pane gamePane;
 
@@ -25,19 +24,21 @@ public class Apple {
         this.y = y;
         this.gamePane = gamePane; // Initialize gamePane
 
+        // create bounding box
         this.boundingBox = new Rectangle(x, y, 75, 75);
 
+        // load image
         Image image = new Image(getClass().getResourceAsStream("/images/Apple.png"));
         this.imageView = new ImageView(image);
 
         this.imageView.setFitWidth(75);
         this.imageView.setFitHeight(75);
 
-        // Set the position of the ImageView
+        // match sprite with object's position
         this.imageView.setX(x);
         this.imageView.setY(y);
 
-        scheduleRemoval(); // Schedule the removal
+        scheduleRemoval(); // Schedule the removal. Gets removed after 5 seconds
     }
 
     public ImageView getImageView() {

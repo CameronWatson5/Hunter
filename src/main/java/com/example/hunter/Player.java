@@ -23,12 +23,12 @@ import java.util.*;
 import java.util.Random;
 
 public class Player {
-    private boolean invincible = false;
+    private boolean invincible = false; // after player is hit, they are invincible for a short time
     private Rectangle debugBoundingBox;
     boolean debugMode = false; // This is used to see the hit boxes of objects
     private long invincibilityDuration = 1000; // Invincibility duration
-    private static final int PLAYER_WIDTH = 102;
-    private static final int PLAYER_HEIGHT = 102;
+    private static final int PLAYER_WIDTH = 102; // pixel width
+    private static final int PLAYER_HEIGHT = 102; // pixel height
 
     private GameController gameController;
     private ImageView characterView;
@@ -46,10 +46,10 @@ public class Player {
     private Image attackSpriteSheetLeft;
     private Image attackSpriteSheetRight;
 
-    private Rectangle2D attackArea;
+    private Rectangle2D attackArea; // used during attacks
 
-    private int attackDamage = 4;
-    private double health = 100;
+    private int attackDamage = 4; // damage
+    private double health = 100; // when 0, player dies
     private double maxHealth = 100;
     private long lastProjectileTime = 0; // Time when the last projectile was fired
     private long projectileCooldown = 500; // Cooldown time in milliseconds

@@ -14,9 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Rock extends Projectile {
-    private static final int FRAME_WIDTH = 40;
-    private static final int FRAME_HEIGHT = 40;
-    private static final int TOTAL_FRAMES = 4;
+    private static final int FRAME_WIDTH = 40; // pixel width
+    private static final int FRAME_HEIGHT = 40; // pixel height
+    private static final int TOTAL_FRAMES = 4; // animation frames
     private static final int DAMAGE = 4;
     private static final double SPEED = 7;
 

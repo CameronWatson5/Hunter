@@ -16,13 +16,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Knight extends Enemy {
-    boolean isKnockedBack = false;
-    private static final int FRAME_WIDTH = 200; // Adjust to your sprite sheet frame width
-    private static final int FRAME_HEIGHT = 102; // Adjust to your sprite sheet frame height
-    private static final int TOTAL_FRAMES = 2; // Number of frames in your sprite sheet
-    private int frameCounter = 0;
-    private int frameDelay = 10;
-    private int currentFrameIndex = 0;
+    private static final int FRAME_WIDTH = 204; // pixel width of PNG photo
+    private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
+    private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
+    private int frameCounter = 0; // animation begins at 0
+    private int frameDelay = 10; // speed of animation
+    private int currentFrameIndex = 0; // current animation
+    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
     private boolean movingRight = true; // Initial movement direction
 
     private Image spriteSheetRight;
@@ -42,7 +42,7 @@ public class Knight extends Enemy {
     }
 
     private void setupSprite() {
-        // Set initial sprite sheet and viewport
+        // Set initial sprite sheet
         this.imageView = new ImageView(movingRight ? spriteSheetRight : spriteSheetLeft);
         this.imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
 

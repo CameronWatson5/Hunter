@@ -18,31 +18,32 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 
-public class Tank extends Boss{
+public class Tank extends Boss implements RangedEnemy{
+
+    private static final int FRAME_WIDTH = 300; // pixel width of PNG photo
+    private static final int FRAME_HEIGHT = 300; // pixel height of PNG photo
+    private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
+    private int frameCounter = 0; // animation begins at 0
+    private int frameDelay = 10; // speed of animation
+    private int currentFrameIndex = 0; // current animation
+    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
     long lastProjectileTime = 0;
     long projectileCooldown = 2000;
-    private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 300;
-    private static final int TOTAL_FRAMES = 2;
-    private int frameCounter = 0;
-    private int frameDelay = 10;
-    private int currentFrameIndex = 0;
-    private boolean isKnockedBack = false;
-
     public Tank(double x, double y, double speed, int initialHealth,  GameController gameController) {
         super(x, y, speed, initialHealth, gameController);
 
+        // load the sprite sheet
         Image spriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Tank.png")));
 
         this.imageView = new ImageView(spriteSheet);
         this.imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
 
-        // Properly initialize the debugBoundingBox
+        // create the debug box
         this.debugBoundingBox = new Rectangle(x, y, FRAME_WIDTH, FRAME_HEIGHT);
         this.debugBoundingBox.setStroke(Color.TRANSPARENT);
         this.debugBoundingBox.setFill(Color.TRANSPARENT);
 
-        // Position the ImageView
+        // match the sprite sheet with the object's location
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
     }

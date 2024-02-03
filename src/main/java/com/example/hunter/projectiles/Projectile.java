@@ -20,7 +20,7 @@ public abstract class Projectile {
     protected double x, y;
     protected double speed;
     protected double directionX, directionY;
-    private boolean firedByPlayer;
+    private boolean firedByPlayer; // this is used to determine who fired the projectile
 
     public Projectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
         this.x = x;

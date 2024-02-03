@@ -15,9 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Rocket extends Projectile {
-    private static final int FRAME_WIDTH = 20;
-    private static final int FRAME_HEIGHT = 20;
-    private static final int TOTAL_FRAMES = 2;
+    private static final int FRAME_WIDTH = 20; // pixel width
+    private static final int FRAME_HEIGHT = 20; // pixel height
+    private static final int TOTAL_FRAMES = 2; // pixel frames
     private static final int DAMAGE = 5;
     private static final double SPEED = 2;
 

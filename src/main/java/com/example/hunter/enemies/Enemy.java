@@ -17,10 +17,10 @@ import java.util.Objects;
 import java.util.Random;
 
 public abstract class Enemy {
-    protected boolean shouldBeRemoved = false;
-    protected ImageView imageView;
-    protected Rectangle2D boundingBox;
-    protected Rectangle debugBoundingBox;
+    protected boolean shouldBeRemoved = false; // set to true to remove object
+    protected ImageView imageView; // visual representation of object
+    protected Rectangle2D boundingBox; // used for collision detection
+    protected Rectangle debugBoundingBox; // used for bug testing
     protected double x, y;
     protected double speed;
     protected int health;
@@ -30,8 +30,8 @@ public abstract class Enemy {
         this.y = y;
         this.speed = speed;
         this.health = initialHealth;
-
     }
+
     public void setPosition(double x, double y) {
         // Update position
         this.imageView.setLayoutX(this.x);

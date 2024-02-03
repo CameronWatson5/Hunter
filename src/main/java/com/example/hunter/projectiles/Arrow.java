@@ -14,9 +14,9 @@ import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
 public class Arrow extends Projectile {
-    private static final int FRAME_WIDTH = 10;
-    private static final int FRAME_HEIGHT = 40;
-    private static final int TOTAL_FRAMES = 2;
+    private static final int FRAME_WIDTH = 10; // pixel width
+    private static final int FRAME_HEIGHT = 40; // pixel height
+    private static final int TOTAL_FRAMES = 2; // animation frames
     private static final int DAMAGE = 1;
     private static final double SPEED = 4;
 

@@ -34,4 +34,3 @@ public abstract class Boss extends Enemy {
     public void update(Player player) {
     }
 }
-

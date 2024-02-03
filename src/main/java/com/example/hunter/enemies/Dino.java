@@ -18,28 +18,30 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Dino extends Enemy {
-    private static final int FRAME_WIDTH = 102;
-    private static final int FRAME_HEIGHT = 102;
-    private static final int TOTAL_FRAMES = 2;
-    private int frameCounter = 0;
-    private int frameDelay = 10;
-    private int currentFrameIndex = 0;
-    private boolean isKnockedBack = false;
+    private static final int FRAME_WIDTH = 102; // pixel width of PNG photo
+    private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
+    private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
+    private int frameCounter = 0; // animation begins at 0
+    private int frameDelay = 10; // speed of animation
+    private int currentFrameIndex = 0; // current animation
+    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
 
     public Dino(double x, double y, double speed, int initialHealth) {
         super(x, y, speed, initialHealth);
 
+        // load sprite sheets
         Image spriteSheet1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino1.png")));
         Image spriteSheet2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino2.png")));
         Image spriteSheet3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino3.png")));
         Image spriteSheet4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino4.png")));
         Image spriteSheet5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino5.png")));
         Image spriteSheet6 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino6.png")));
+
         // Randomly select a sprite sheet
         Random random = new Random();
         int randomNumber = random.nextInt(6);
 
-// Select the sprite sheet based on the generated number
+        // Select the sprite sheet based on the generated number
         Image selectedSpriteSheet;
         switch (randomNumber) {
             case 0:
@@ -68,12 +70,12 @@ public class Dino extends Enemy {
         this.imageView = new ImageView(selectedSpriteSheet);
         this.imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
 
-        // Properly initialize the debugBoundingBox
+        // create the debug box
         this.debugBoundingBox = new Rectangle(x, y, FRAME_WIDTH, FRAME_HEIGHT);
         this.debugBoundingBox.setStroke(Color.TRANSPARENT);
         this.debugBoundingBox.setFill(Color.TRANSPARENT);
 
-        // Position the ImageView
+        // match the sprite sheet with the object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
     }
@@ -112,7 +114,6 @@ public class Dino extends Enemy {
         if (health <= 0) {
             markForRemoval();
         } else {
-           //isKnockedBack=true;
            applyKnockback(player);
         }
     }

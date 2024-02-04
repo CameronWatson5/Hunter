@@ -296,6 +296,7 @@ public class GameController {
                 gamePane.getChildren().remove(apple.getImageView());
                 player.setHealth(Math.min(player.getHealth() + 10, 100));
                 appleIterator.remove();
+                playAppleSound();
                 updateHealthBar();
             }
         }
@@ -836,6 +837,16 @@ public class GameController {
     public void playDeathSound() {
         try {
             String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/die.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
+        }
+    }
+    public void playAppleSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/apple.mp3")).toExternalForm();
             Media sound = new Media(soundPath);
             MediaPlayer mediaPlayer = new MediaPlayer(sound);
             mediaPlayer.play();

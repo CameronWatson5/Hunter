@@ -13,6 +13,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class Bullet extends Projectile {
     private static final int FRAME_WIDTH = 10; // pixel width
     private static final int FRAME_HEIGHT = 10; // pixel height
@@ -33,7 +35,7 @@ public class Bullet extends Projectile {
         this.frameHeight = FRAME_HEIGHT;
         this.damage = DAMAGE;
 
-        Image image = new Image(getClass().getResourceAsStream("/images/bullet.png"));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/bullet.png")));
         this.imageView = new ImageView(image);
         imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
         imageView.setLayoutX(x);

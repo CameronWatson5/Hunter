@@ -12,6 +12,8 @@ import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import java.util.Objects;
@@ -65,6 +67,7 @@ public class Archer extends Enemy implements RangedEnemy {
             int damage = 4;
 
             if (gameController != null) { // Check if gameController is not null
+                playArrowSound();
                 gameController.createArrowProjectile(this.x, this.y, directionX, directionY, projectileSpeed, damage, false);
             } else {
                 System.out.println("GameController is null");
@@ -110,6 +113,17 @@ public class Archer extends Enemy implements RangedEnemy {
             currentFrameIndex = (currentFrameIndex + 1) % TOTAL_FRAMES;
             imageView.setViewport(new Rectangle2D(currentFrameIndex * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));
             frameCounter = 0; // Reset the counter
+        }
+    }
+    // Method to play gunshot sound
+    public void playArrowSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/arrow.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
         }
     }
 }

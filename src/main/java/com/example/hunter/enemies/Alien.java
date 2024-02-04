@@ -43,7 +43,6 @@ public class Alien extends Boss{
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-
     // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {

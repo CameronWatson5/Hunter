@@ -13,6 +13,8 @@ import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -107,10 +109,22 @@ public class Tank extends Boss implements RangedEnemy{
             int damage = 4;
 
             if (gameController != null) {
+                playCannonSound();
                 gameController.createRocketProjectile(this.x, this.y, directionX, directionY, projectileSpeed, damage, false);
             } else {
                 System.out.println("GameController is null in Archer.fireProjectile");
             }
+        }
+    }
+    // Method to play Cannon sound
+    public void playCannonSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/cannonShot.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
         }
     }
 }

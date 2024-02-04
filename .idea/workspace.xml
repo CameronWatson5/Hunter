@@ -9,10 +9,16 @@
   <component name="ChangeListManager">
     <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added comments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Enemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Enemy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +123,7 @@
       <workItem from="1706829256054" duration="6805000" />
       <workItem from="1706975837763" duration="25000" />
       <workItem from="1706986174961" duration="1629000" />
-      <workItem from="1706987874020" duration="13048000" />
+      <workItem from="1706987874020" duration="18725000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -239,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707014909722</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added comments">
+      <option name="closed" value="true" />
+      <created>1707050044284</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1707050044284</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

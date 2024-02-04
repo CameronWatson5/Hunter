@@ -6,6 +6,9 @@ import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
 import java.util.Objects;
 
 public class SuperSoldier extends Soldier {
@@ -42,13 +45,25 @@ public class SuperSoldier extends Soldier {
             }
 
             double projectileSpeed = 8;
-            int damage = 4;
+            int damage = 8;
 
             if (gameController != null) {
+                playLaserSound();
                 gameController.createLaserProjectile(this.x, this.y, directionX, directionY, projectileSpeed, damage, false);
             } else {
                 System.out.println("GameControllers null in Soldier.fireProjectile");
             }
+        }
+    }
+    // Method to play laser sound
+    public void playLaserSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/laser.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
         }
     }
 }

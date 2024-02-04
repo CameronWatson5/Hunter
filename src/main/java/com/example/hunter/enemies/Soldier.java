@@ -12,6 +12,8 @@ import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -83,6 +85,7 @@ public class Soldier extends Enemy implements RangedEnemy{
             int damage = 4;
 
             if (gameController != null) {
+                playGunshotSound();
                 gameController.createBulletProjectile(this.x, this.y, directionX, directionY, projectileSpeed, damage, false);
             } else {
                 System.out.println("GameController is null in Soldier.fireProjectile");
@@ -131,4 +134,16 @@ public class Soldier extends Enemy implements RangedEnemy{
             frameCounter = 0; // Reset the counter
         }
     }
+    // Method to play gunshot sound
+    public void playGunshotSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/gunshot.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
+        }
+    }
+
 }

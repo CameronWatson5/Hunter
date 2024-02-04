@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class Rock extends Projectile {
     private static final int FRAME_WIDTH = 40; // pixel width
     private static final int FRAME_HEIGHT = 40; // pixel height
@@ -29,9 +31,8 @@ public class Rock extends Projectile {
     protected void setupProjectile() {
         this.frameWidth = FRAME_WIDTH;
         this.frameHeight = FRAME_HEIGHT;
-        this.damage = damage;
 
-        Image image = new Image(getClass().getResourceAsStream("/images/rockSpriteSheet.png"));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/rockSpriteSheet.png")));
         this.imageView = new ImageView(image);
         imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
         imageView.setLayoutX(x);

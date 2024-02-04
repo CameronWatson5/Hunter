@@ -13,12 +13,15 @@ import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.*;
 import java.util.Random;
 
@@ -38,31 +41,15 @@ public class Player {
     private Image spriteSheetRight; // sprite sheet when moving right
     private Image weaponSpriteSheet; // sprite sheet for sword
     private Direction currentDirection = Direction.DOWN; // Keeps track of the current direction
-    private boolean isAttacking = false;
-    private Image attackSpriteSheetUp;
-    private Image attackSpriteSheetDown;
-    private Image attackSpriteSheetLeft;
-    private Image attackSpriteSheetRight;
+    private boolean isAttacking = false; // Used to determine when a player is attacking
+    private Image attackSpriteSheetUp; // sprite sheet used when attacking up
+    private Image attackSpriteSheetDown; // sprite sheet used when attacking down
+    private Image attackSpriteSheetLeft; // sprite sheet used when attacking left
+    private Image attackSpriteSheetRight; // sprite sheet used when attacking right
 
     private double health = 100; // when 0, player dies
     private long lastProjectileTime = 0; // Time when the last projectile was fired
 
-    public void receiveDamage(int damage) {
-        if (!invincible) {
-            health -= damage;
-            if (health < 0) {
-                health = 0;
-            }
-            invincible = true;
-
-            // Invincibility duration
-            long invincibilityDuration = 1000;
-            PauseTransition pause = new PauseTransition(Duration.millis(invincibilityDuration));
-            pause.setOnFinished(event -> invincible = false);
-            pause.play();
-            Platform.runLater(gameController::updateHealthBar);
-        }
-    }
     public Player(ImageView characterView, String imagePath, GameController gameController) {
         this.gameController = gameController;
         this.characterView = Objects.requireNonNull(characterView, "characterView cannot be null");
@@ -84,6 +71,27 @@ public class Player {
         setupStandingAnimation();
     }
 
+    // This method checks if the player is invincible. The player is invincible for 1 second after
+    // being attacked. This is to stop the player being instantly killed if attacked from multiple directions at once.
+    // The UI is also updated with the new health.
+    public void receiveDamage(int damage) {
+        if (!invincible) {
+            health -= damage;
+            if (health < 0) {
+                health = 0;
+            }
+            invincible = true;
+
+            // Invincibility duration
+            long invincibilityDuration = 1000;
+            PauseTransition pause = new PauseTransition(Duration.millis(invincibilityDuration));
+            pause.setOnFinished(event -> invincible = false);
+            pause.play();
+            Platform.runLater(gameController::updateHealthBar);
+        }
+    }
+
+    // Used when debugging
     private void updateDebugBoundingBox() {
         if (debugMode) {
             Rectangle2D boundingBox = getBoundingBox();
@@ -93,13 +101,17 @@ public class Player {
             debugBoundingBox.setHeight(boundingBox.getHeight());
         }
     }
-    private void loadSpriteSheets(){
+
+    // loads the sprite sheets for walking up, down, left, and right
+    private void loadSpriteSheets() {
         // In the constructor or a dedicated method
         spriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/upWalkSpriteSheet.png")));
         spriteSheetDown = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/downWalkspriteSheet.png")));
         spriteSheetLeft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/leftWalkspriteSheet.png")));
         spriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/rightWalkSpriteSheet.png")));
     }
+
+    // loads the sprite sheets for attacking up, down, left, and right
     private void loadAttackSpriteSheets() {
         weaponSpriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/swordSpriteSheet.png")));
         attackSpriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackUpSpriteSheet.png")));
@@ -107,12 +119,15 @@ public class Player {
         attackSpriteSheetLeft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackLeftSpriteSheet.png")));
         attackSpriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackRightSpriteSheet.png")));
     }
+
+    // fires a rock projectile, has a 0.5 second cooldown.
     public void fireProjectile() {
         long currentTime = System.currentTimeMillis(); // Get the current time
         // Cooldown time in milliseconds
         long projectileCooldown = 500;
         if (currentTime - lastProjectileTime >= projectileCooldown) {
 
+            playRockSound();
             lastProjectileTime = currentTime; // Update the last projectile time
 
             double directionX = 0;
@@ -134,16 +149,17 @@ public class Player {
                     directionX = 1;
                     break;
             }
-
             // Create a new projectile
             int damage = 4;
             gameController.createRockProjectile(getX(), getY(), directionX, directionY, speed, damage, true);
         }
     }
+
+    // This method is used for melee attack
     public void attack() {
         if (!isAttacking) {
             isAttacking = true;
-
+            playSwooshSound();
             // Store the current direction before attacking
             Direction directionBeforeAttack = currentDirection;
             double attackWidth = 102; // Width of the attack area
@@ -284,6 +300,7 @@ public class Player {
             })).play();
         }
     }
+
     private void setupStandingAnimation() {
         InputStream stream = getClass().getResourceAsStream("/images/downWalkSpriteSheet.png");
         if (stream == null) {
@@ -296,6 +313,8 @@ public class Player {
 
         setupAnimation(standingSpriteSheet, numberOfFrames, frameTime, true);
     }
+
+    // Used for player movement
     public void move(double dx, double dy) {
         if (dx > 0) {
             walkRight();
@@ -311,50 +330,63 @@ public class Player {
         updateDebugBoundingBox();
     }
 
+    // Sets up animation
     private void walkUp() {
         if (currentDirection != Direction.UP) {
             currentDirection = Direction.UP;
             setupAnimation(spriteSheetUp, 2, Duration.millis(200), true);
         }
     }
+
+    // Sets up animation
     private void walkDown() {
         if (currentDirection != Direction.DOWN) {
             currentDirection = Direction.DOWN;
             setupAnimation(spriteSheetDown, 2, Duration.millis(200), true);
         }
     }
+
+    // Sets up animation
     private void walkLeft() {
         if (currentDirection != Direction.LEFT) {
             currentDirection = Direction.LEFT;
             setupAnimation(spriteSheetLeft, 2, Duration.millis(200), true);
         }
     }
+
+    // Sets up animation
     private void walkRight() {
         if (currentDirection != Direction.RIGHT) {
             currentDirection = Direction.RIGHT;
             setupAnimation(spriteSheetRight, 2, Duration.millis(200), true);
         }
     }
+
+    // Sets up animation
     private void walkUpAfterAttack() {
         currentDirection = Direction.UP;
         setupAnimation(spriteSheetUp, 2, Duration.millis(200), true);
     }
 
+    // Sets up animation
     private void walkDownAfterAttack() {
         currentDirection = Direction.DOWN;
         setupAnimation(spriteSheetDown, 2, Duration.millis(200), true);
     }
 
+    // Sets up animation
     private void walkLeftAfterAttack() {
         currentDirection = Direction.LEFT;
         setupAnimation(spriteSheetLeft, 2, Duration.millis(200), true);
     }
 
+    // Sets up animation
     private void walkRightAfterAttack() {
         currentDirection = Direction.RIGHT;
         setupAnimation(spriteSheetRight, 2, Duration.millis(200), true);
     }
 
+    // Sets up animation
     private void setupAnimation(Image spriteSheet, int numberOfFrames, Duration frameTime, boolean loopAnimation) {
         characterView.setImage(spriteSheet);
         characterView.setViewport(new Rectangle2D(0, 0, 102, 102));
@@ -378,6 +410,8 @@ public class Player {
         }
         timeline.play();
     }
+
+    // used for collision detection
     public Rectangle2D getBoundingBox() {
         // reduction factor
         double reductionFactor = 0.2;
@@ -390,24 +424,31 @@ public class Player {
 
         return new Rectangle2D(getX() + offsetX, getY() + offsetY, reducedWidth, reducedHeight);
     }
+
     public double getX() {
         return characterView.getX();
     }
+
     public double getY() {
         return characterView.getY();
     }
+
     public double getHealth() {
         return health;
     }
+
     public double getMaxHealth() {
         return 100;
     }
+
     public void setHealth(double maxHealth) {
         health = maxHealth;
     }
+
     public void setX(int x) {
         characterView.setX(x);
     }
+
     public void setY(int y) {
         characterView.setY(y);
     }
@@ -416,15 +457,44 @@ public class Player {
         return debugBoundingBox;
     }
 
-
+    // list of possible directions
     private enum Direction {
-            UP, DOWN, LEFT, RIGHT, STANDING
-        }
+        UP, DOWN, LEFT, RIGHT, STANDING
+    }
+
     public void standStill() {
         if (currentDirection != Direction.STANDING) {
             currentDirection = Direction.STANDING;
             characterView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/standingSpriteSheet.png"))));
             setupStandingAnimation();
+        }
+    }
+    public void playSwooshSound() {
+        try {
+            // Adjust the path to where your sound file is located
+            URL resource = getClass().getResource("/sounds/swoosh.mp3");
+            if (resource == null) {
+                System.err.println("Sound file not found");
+                return;
+            }
+            String path = resource.toString();
+            Media sound = new Media(path);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.err.println("Error playing the sound.");
+        }
+    }
+    // Method to play rock sound
+    public void playRockSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/rock.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
         }
     }
 }

@@ -31,6 +31,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -221,6 +223,7 @@ public class GameController {
     // This method has a 10% chance of randomly dropping an apple
     // object when an enemy dies. It also removes the enemy object and its visual representation.
     public void removeEnemy(Enemy enemy) {
+        playDeathSound();
         Random rand = new Random();
         if (rand.nextDouble() <=0.1) { // 10% chance to drop an apple
             Apple apple = new Apple(enemy.getX(), enemy.getY(), gamePane);
@@ -828,6 +831,17 @@ public class GameController {
         EASY,
         MEDIUM,
         HARD
+    }
+    // Method to play death sound
+    public void playDeathSound() {
+        try {
+            String soundPath = Objects.requireNonNull(getClass().getResource("/sounds/die.mp3")).toExternalForm();
+            Media sound = new Media(soundPath);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle exception
+        }
     }
     // sets the difficult to easy, medium, or hard/
     public void setCurrentDifficulty(Difficulty difficulty) {

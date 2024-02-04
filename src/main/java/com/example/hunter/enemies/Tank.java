@@ -88,6 +88,7 @@ public class Tank extends Boss implements RangedEnemy{
             frameCounter = 0; // Reset the counter
         }
     }
+    // This method is used to fire projectiles after a certain time period.
     public void fireProjectile(Player player) {
         long currentTime = System.currentTimeMillis();
 

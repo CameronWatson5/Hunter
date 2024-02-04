@@ -50,8 +50,7 @@ public class Soldier extends Enemy implements RangedEnemy{
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-
-
+    // This method is used to fire projectiles after a certain time period.
     public void fireProjectile(Player player) {
         long currentTime = System.currentTimeMillis();
 

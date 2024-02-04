@@ -24,6 +24,8 @@ public abstract class Boss extends Enemy {
             applyKnockback(player);
         }
     }
+    // This method tells the GameController class that the boss has been defeated
+    // so that the game can move to the next age.
     public void onBossDefeated() {
         // Notify GameController when the boss is defeated
         if (this.gameController != null) {

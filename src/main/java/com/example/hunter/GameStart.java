@@ -28,6 +28,7 @@ import java.util.Objects;
 
 public class GameStart extends Application {
     private GameController gameController;
+    // Loads the GUI for the game
     @Override
     public void start(Stage primaryStage) {
         try {
@@ -51,6 +52,7 @@ public class GameStart extends Application {
             e.printStackTrace();
         }
     }
+    // This allows the player to either exit or start the game.
     private void showStartupPopup(Stage primaryStage) {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -119,7 +121,7 @@ public class GameStart extends Application {
     public void onDifficultySelected(GameController.Difficulty selectedDifficulty) {
         gameController.setCurrentDifficulty(selectedDifficulty);
     }
-
+    // The main method which begins the entire program
     public static void main(String[] args) {
             launch(args);
         }

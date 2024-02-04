@@ -102,6 +102,7 @@ public class Hoplite extends Enemy {
             frameCounter = 0; // Reset the counter
         }
     }
+    // Keeps track of if the enemy is approaching or retreating. This is timed.
     private enum State {
         APPROACHING,
         RETREATING

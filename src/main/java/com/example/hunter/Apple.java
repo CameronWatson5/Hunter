@@ -41,23 +41,24 @@ public class Apple {
         this.imageView.setX(x);
         this.imageView.setY(y);
 
-        scheduleRemoval(); // Schedule the removal. Gets removed after 5 seconds
+        scheduleRemoval(); // Gets removed after 5 seconds
     }
-
+    // returns visual representation of apple
     public ImageView getImageView() {
         return imageView;
     }
-
+    // used for collisions detection
     public Rectangle getBoundingBox() {
         return boundingBox;
     }
-
+    // This removes the apple after 5 seconds.
     private void scheduleRemoval() {
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
         delay.setOnFinished(event -> gamePane.getChildren().remove(imageView));
         delay.play();
     }
-
+    // Checks if the player's bounding box intersects with the apple's bounding box.
+    // If it does, the player receives 10 health points.
     public boolean checkCollision(Player player) {
         Rectangle2D playerBoundingBox = player.getBoundingBox();
         Rectangle2D appleBoundingBox = new Rectangle2D(

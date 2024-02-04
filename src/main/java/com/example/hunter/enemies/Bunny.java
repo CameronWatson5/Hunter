@@ -48,7 +48,8 @@ public class Bunny extends Boss {
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-    // The update method is a loop that keeps track of the enemy's state.
+    // The update method is a loop that keeps track of the enemy's state. This enemy
+    // also moves randomly.
     @Override
     public void update(Player player) {
 

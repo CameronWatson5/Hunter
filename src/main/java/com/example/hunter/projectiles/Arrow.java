@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class Arrow extends Projectile {
     private static final int FRAME_WIDTH = 10; // pixel width
     private static final int FRAME_HEIGHT = 40; // pixel height
@@ -24,14 +26,15 @@ public class Arrow extends Projectile {
 
         setupProjectile();
     }
-
+    // sets up the visual representation of the projectile and creates a bounding box
+    // which is used for collisions.
     @Override
     protected void setupProjectile() {
         this.frameWidth = FRAME_WIDTH;
         this.frameHeight = FRAME_HEIGHT;
         this.damage = DAMAGE;
 
-        Image image = new Image(getClass().getResourceAsStream("/images/Arrow.png"));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Arrow.png")));
         this.imageView = new ImageView(image);
         imageView.setViewport(new Rectangle2D(0, 0, FRAME_WIDTH, FRAME_HEIGHT));
         imageView.setLayoutX(x);
@@ -40,8 +43,7 @@ public class Arrow extends Projectile {
 
         setupAnimation(); // Initialize the animation
     }
-
-
+    // The animation always plays.
     private void setupAnimation() {
         Timeline animationTimeline = new Timeline(new KeyFrame(Duration.millis(100), e -> updateAnimationFrame()));
         animationTimeline.setCycleCount(Timeline.INDEFINITE);

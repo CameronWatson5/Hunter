@@ -60,19 +60,19 @@ public class GameController {
     private Player player;
     private final ArrayList<Projectile> projectiles = new ArrayList<>();
     private int score = 0; // scores begins at 0 and is reset when game is reset
-    private Age currentAge;
-    private boolean bossDefeated;
-    private boolean isGameOver = false;
+    private Age currentAge; // This keeps track of the current age
+    private boolean bossDefeated; // This is used to update the age after the boss is killed
+    private boolean isGameOver = false; // Game starts as playing
     private static GameState gameState; // An enum for game states
     private final List<Apple> apples = new ArrayList<>(); // used for apple objects.
 
-    private final int initialPlayerX = 400;
-    private final int initialPlayerY = 400;
-    private List<ScoreEntry> scoreList = new ArrayList<>();
-
-    private boolean bossSpawned;
-    private long lastPauseTime = 0;
+    private final int initialPlayerX = 400; // spawn location of player
+    private final int initialPlayerY = 400; // spawn location of player
+    private List<ScoreEntry> scoreList = new ArrayList<>(); // list of top 10 best scores.
+    private boolean bossSpawned; // keeps track of if the boss is on the screen
+    private long lastPauseTime = 0; // This stops someone accidentally pausing then unpausing instantly
     private final Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is used so multiple buttons can be pressed
+    // This initialises the game and sets up all the necessary elements.
     public void initialize() {
         bossSpawned = false;
         bossDefeated = false;
@@ -121,7 +121,8 @@ public class GameController {
     public ArrayList<Enemy> getEnemies() {
         return this.enemies;
     }
-
+    // This spawns enemies and picks a random direction for them to spawn from. Also,
+    // The enemies that are spawned depend on the current game's age.
     private void spawnEnemy() {
         if (enemies.size() >= 15) {
             return; // Do not spawn more enemies if the limit is reached
@@ -129,26 +130,25 @@ public class GameController {
         double x, y;
         int edge = (int) (Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
 
-        switch (edge) {
-            case 0: // top
+        y = switch (edge) {
+            case 0 -> { // top
                 x = Math.random() * gamePane.getWidth();
-                y = 0;
-                break;
-            case 1: // right
+                yield 0;
+            }
+            case 1 -> { // right
                 x = gamePane.getWidth();
-                y = Math.random() * gamePane.getHeight();
-                break;
-            case 2: // bottom
+                yield Math.random() * gamePane.getHeight();
+            }
+            case 2 -> { // bottom
                 x = Math.random() * gamePane.getWidth();
-                y = gamePane.getHeight();
-                break;
-            case 3: // left
+                yield gamePane.getHeight();
+            }
+            case 3 -> { // left
                 x = 0;
-                y = Math.random() * gamePane.getHeight();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + edge);
-        }
+                yield Math.random() * gamePane.getHeight();
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + edge);
+        };
         Enemy enemy;
         Random random = new Random();
 
@@ -169,34 +169,20 @@ public class GameController {
             }
         } else if (currentAge == Age.MEDIEVAL_AGE) {
             int enemyType = random.nextInt(3); // Random number between 0 and 2
-            switch (enemyType) {
-                case 0:
-                    enemy = new Archer(x, y, 1, 8, this);
-                    break;
-                case 1:
-                    enemy = new Knight(x, y, 3.5, 12);
-                    break;
-                case 2:
-                    enemy = new Peasant(x, y, 3, 8);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected enemy type: " + enemyType);
-            }
+            enemy = switch (enemyType) {
+                case 0 -> new Archer(x, y, 1, 8, this);
+                case 1 -> new Knight(x, y, 3.5, 12);
+                case 2 -> new Peasant(x, y, 3, 8);
+                default -> throw new IllegalStateException("Unexpected enemy type: " + enemyType);
+            };
         } else if (currentAge == Age.MODERN_AGE) {
             int enemyType = random.nextInt(3); // Random number between 0 and 2
-            switch (enemyType) {
-                case 0:
-                    enemy = new Soldier(x, y, 1, 4, this);
-                    break;
-                case 1:
-                    enemy = new Police(x, y, 0.5, 16);
-                    break;
-                case 2:
-                    enemy = new Ned(x, y, 3.5, 8);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected enemy type: " + enemyType);
-            }
+            enemy = switch (enemyType) {
+                case 0 -> new Soldier(x, y, 1, 4, this);
+                case 1 -> new Police(x, y, 0.5, 16);
+                case 2 -> new Ned(x, y, 3.5, 8);
+                default -> throw new IllegalStateException("Unexpected enemy type: " + enemyType);
+            };
         } else if (currentAge == Age.FUTURE_AGE) {
             int enemyType = random.nextInt(3); // Random number between 0 and 2
             switch (enemyType) {
@@ -232,8 +218,8 @@ public class GameController {
     public void addEnemy(Enemy enemy) {
         enemies.add(enemy);
     }
-
-
+    // This method has a 10% chance of randomly dropping an apple
+    // object when an enemy dies. It also removes the enemy object and its visual representation.
     public void removeEnemy(Enemy enemy) {
         Random rand = new Random();
         if (rand.nextDouble() <=0.1) { // 10% chance to drop an apple
@@ -244,25 +230,23 @@ public class GameController {
         enemies.remove(enemy);
         gamePane.getChildren().remove(enemy.getImageView());
     }
-
-
+    // This is used by the Player class to throw rocks
     public void createRockProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
-
         Projectile projectile = new Rock(x, y, directionX, directionY, speed, damage, firedByPlayer);
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
+    // This is used by the Archer class to fire arrows.
     public void createArrowProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
-
         Projectile projectile = new Arrow(x, y, directionX, directionY, speed, damage, firedByPlayer);
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
-
+    // Adds projectile objects to the game.
     public void addProjectileToGame(Projectile projectile) {
         gamePane.getChildren().add(projectile.getView());
     }
-
+    // Begins the gameLoop by constantly calling the updateGame method
     private void setupGameLoop() {
         gameLoop = new AnimationTimer() {
             @Override
@@ -279,13 +263,14 @@ public class GameController {
         };
         gameLoop.start();
     }
-
+    // Sets up the UI score
     private void updateScoreDisplay() {
         Platform.runLater(() -> {
             scoreLabel.setText("Score: " + score);
         });
     }
-
+    // This is constantly called by the gameLoop, and
+    // this continually updates the game and makes gameplay possible.
     private void updateGame() {
         if (gameState == GameState.PAUSED) {
             return;
@@ -382,18 +367,13 @@ public class GameController {
         projectiles.removeAll(projectilesToRemove);
         projectilesToRemove.forEach(projectile -> gamePane.getChildren().remove(projectile.getView()));
     }
+    // the damage based on collision done to the player depends on the difficulty.
     private void checkCollisionWithPlayer(Enemy enemy) {
-        int damage;
-        switch (currentDifficulty) {
-            case EASY:
-                damage = 1;
-                break;
-            case HARD:
-                damage = 15;
-                break;
-            default:
-                damage = 10;
-        }
+        int damage = switch (currentDifficulty) {
+            case EASY -> 1;
+            case HARD -> 15;
+            default -> 10;
+        };
         if (player.getBoundingBox().intersects(enemy.getBoundingBox())) {
             player.receiveDamage(damage);
         }
@@ -401,9 +381,8 @@ public class GameController {
     public void setPlayer(Player player) {
         this.player = player;
     }
-
+    // This pauses the game if Q is pressed. Else, the player can move and attack.
     public void onKeyPressed(KeyEvent keyEvent) {
-        //System.out.println("Key Pressed: " + keyEvent.getCode());
         if (keyEvent.getCode() == KeyCode.Q) {
             togglePauseState();
         } else {
@@ -411,6 +390,7 @@ public class GameController {
             updateMovement();
         }
     }
+    // stops the gameplay when paused with the Q key.
     private void togglePauseState() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastPauseTime < 500) { // 500 milliseconds threshold
@@ -431,11 +411,13 @@ public class GameController {
         }
         System.out.println("Current GameState after toggling: " + gameState);
     }
+    // Checks if a key has stopped being pushed down
     public void onKeyReleased(KeyEvent keyEvent) {
         keysPressed.remove(keyEvent.getCode());
         updateMovement();
     }
-
+    // Used for the player to move either by WASD of arrows. Also, SPACE for attack and
+    // Z for projectiles
     private void updateMovement() {
         if (gameState == GameState.PAUSED) {
             return; // Ignore movement commands if the game is paused
@@ -467,6 +449,7 @@ public class GameController {
             player.fireProjectile();
         }
     }
+    // updates the UI health bar
     void updateHealthBar() {
         if (player != null) {
             double healthPercentage = player.getHealth() / player.getMaxHealth();
@@ -474,14 +457,14 @@ public class GameController {
             healthLabel.setText(String.format("%.0f", player.getHealth())); // Update label
         }
     }
-
+    // The game state is set to GAME_OVER when the game ends.
     private void endGame() {
         if (gameState != GameState.GAME_OVER) {
             gameState = GameState.GAME_OVER;
             promptForPlayerName(score);
         }
     }
-
+    // When the player's health is <= 0, this popup appears.
     private void showGameOverPopup() {
         Stage popupStage = new Stage();
         popupStage.initModality(Modality.APPLICATION_MODAL);
@@ -528,7 +511,7 @@ public class GameController {
 
         popupStage.showAndWait();
     }
-
+    // resets the game state to make it possible to replay.
     private void resetGame() {
         keysPressed.clear();
         bossSpawned = false;
@@ -563,27 +546,26 @@ public class GameController {
     public void onDifficultySelected(GameController.Difficulty selectedDifficulty) {
         setCurrentDifficulty(selectedDifficulty);
     }
-
+    // Checks if a projectile is out of bounds
     private boolean isOutOfBounds(Projectile projectile) {
         double x = projectile.getX();
         double y = projectile.getY();
         return x < 0 || x > gamePane.getWidth() || y < 0 || y > gamePane.getHeight();
     }
-
+    // If the player goes out of bounds, they are sent to the other side of the screen.
     public void updatePlayerPosition(Player player) {
         if (player.getX() > gamePane.getWidth()) {
             player.setX(0);
         } else if (player.getX() < 0) {
             player.setX((int) gamePane.getWidth());
         }
-
         if (player.getY() > gamePane.getHeight()) {
             player.setY(0);
         } else if (player.getY() < 0) {
             player.setY((int) gamePane.getHeight());
         }
     }
-
+    // If an enemy goes out of bounds, they are sent to the other side of the screen.
     public void updateEnemyPosition(Enemy enemy) {
         if (enemy.getX() > gamePane.getWidth()) {
             enemy.setX(0);
@@ -596,23 +578,23 @@ public class GameController {
             enemy.setY((int) gamePane.getHeight());
         }
     }
-
+    // used to start the game
     public void startGame() {
         setupGameLoop();
     }
-
+    // Used by the Soldier class to fire bullets.
     public void createBulletProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
             Projectile projectile = new Bullet(x, y, directionX, directionY, speed, damage, firedByPlayer);
             this.projectiles.add(projectile);
             addProjectileToGame(projectile);
     }
-
+    // Used by the Tank class to fire rockets.
     public void createRocketProjectile(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
         Projectile projectile = new Rocket(x, y, directionX, directionY, speed, damage, firedByPlayer);
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
-
+    // Used by the SuperSoldier class to fire lasers.
     public void createLaserProjectile(double x, double y, double directionX, double directionY, double projectileSpeed, int damage, boolean b) {
         double speed = 8;
         boolean firedByPlayer = false;
@@ -620,7 +602,7 @@ public class GameController {
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
-
+    // A list of the Game's ages.
     public enum Age {
         STONE_AGE,
         CLASSICAL_AGE,
@@ -628,7 +610,8 @@ public class GameController {
         MODERN_AGE,
         FUTURE_AGE
     }
-
+    // When playing, the gameLoop runs and player movement and attacks are possible.
+    // These are suspended when the game is paused or over.
     public enum GameState {
         PLAYING,
         PAUSED,
@@ -655,7 +638,8 @@ public class GameController {
     public Pane getGamePane() {
         return gamePane;
     }
-
+    // After the player loses the game, they are asked to provide a String.
+    // Then, this may be listed if it is in the top 10 recorded scores.
     private void promptForPlayerName(int score) {
         gameLoop.stop();
         Platform.runLater(() -> {
@@ -677,7 +661,7 @@ public class GameController {
             });
         });
     }
-
+    // updates the age based on score. The boss also needs to be defeated.
     private void updateAge() {
         if(currentAge == Age.FUTURE_AGE){
         return;}
@@ -698,7 +682,7 @@ public class GameController {
             changeGameElementsForAge();
         }
     }
-
+    // provides the background image for each age.
     private void changeGameElementsForAge() {
         String ageText = "";
         String backgroundImageUrl = switch (currentAge) {
@@ -727,7 +711,7 @@ public class GameController {
         String finalAgeText = ageText;
         Platform.runLater(() -> ageDisplayLabel.setText("Current Age: " + finalAgeText));
     }
-
+    // Shows a list of the top 10 scores with the names associated with the scores.
     private void showScoreboard() {
         List<ScoreEntry> scoreList = ScoreEntry.loadScores();
         Stage scoreboardStage = new Stage();
@@ -751,10 +735,10 @@ public class GameController {
         scoreboardStage.setScene(scene);
         scoreboardStage.showAndWait();
     }
-
+    // Changed the background image.
     private void updateBackgroundImage(String imageUrl) {
         try {
-            Image background = new Image(getClass().getResourceAsStream(imageUrl));
+            Image background = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imageUrl)));
             BackgroundSize bgSize = new BackgroundSize(
                     BackgroundSize.AUTO, BackgroundSize.AUTO,
                     false, false,
@@ -772,7 +756,7 @@ public class GameController {
             e.printStackTrace();
         }
     }
-
+    // removes enemy objects from the game.
     private void clearEnemies() {
         for (Enemy enemy : enemies) {
             gamePane.getChildren().remove(enemy.getImageView());
@@ -780,7 +764,7 @@ public class GameController {
         }
         enemies.clear();
     }
-
+    // Checks when the boss should spawn based on score.
     private boolean isTimeForBoss() {
         // Check if the boss has already been spawned in the current age
         if (bossSpawned) {
@@ -795,13 +779,15 @@ public class GameController {
             case FUTURE_AGE -> score >= 220;
         };
     }
-
+    // The enemies are cleared before changing the age. Also, the assets are changed,
+    // bossSpawned is reset to false so that the next boss can spawn.
     private void transitionToNextAge() {
         clearEnemies();
         updateAge();
         changeGameElementsForAge();
         bossSpawned = false;
     }
+    // This method changed the boss based on the current age then spawns the boss.
     private Enemy selectBossForCurrentAge() {
         double x, y;
         int edge = (int) (Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
@@ -833,14 +819,17 @@ public class GameController {
             case FUTURE_AGE -> new Alien(x, y, 2, 1000, this);
         };
     }
+    // set boss to defeated in order to progress to next age.
     public void setBossDefeated(boolean defeated) {
         this.bossDefeated = defeated;
     }
+    // List of difficulties.
     public enum Difficulty {
         EASY,
         MEDIUM,
         HARD
     }
+    // sets the difficult to easy, medium, or hard/
     public void setCurrentDifficulty(Difficulty difficulty) {
         this.currentDifficulty = difficulty;
     }

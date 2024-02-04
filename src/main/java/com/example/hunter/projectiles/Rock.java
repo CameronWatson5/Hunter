@@ -23,7 +23,8 @@ public class Rock extends Projectile {
         super(x, y, directionX, directionY, SPEED, DAMAGE, firedByPlayer);
         setupProjectile();
     }
-
+    // sets up the visual representation of the projectile and creates a bounding box
+    // which is used for collisions.
     @Override
     protected void setupProjectile() {
         this.frameWidth = FRAME_WIDTH;
@@ -39,7 +40,7 @@ public class Rock extends Projectile {
 
         setupAnimation();
     }
-
+    // The animation always plays.
     private void setupAnimation() {
         Timeline animationTimeline = new Timeline(new KeyFrame(Duration.millis(100), e -> updateAnimationFrame()));
         animationTimeline.setCycleCount(Timeline.INDEFINITE);

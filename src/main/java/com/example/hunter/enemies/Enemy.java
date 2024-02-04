@@ -31,7 +31,7 @@ public abstract class Enemy {
         this.speed = speed;
         this.health = initialHealth;
     }
-
+    // set the enemies' coordinates
     public void setPosition(double x, double y) {
         // Update position
         this.imageView.setLayoutX(this.x);
@@ -49,7 +49,7 @@ public abstract class Enemy {
             applyKnockback(player);
         }
     }
-
+    // This method knocks the enemy back away from the player by 100 pixels.
     void applyKnockback(Player player) {
         double knockbackDistance = 100;
         double deltaX = this.x - player.getX();
@@ -62,28 +62,19 @@ public abstract class Enemy {
 
             double newX = this.x + dirX * knockbackDistance;
             double newY = this.y + dirY * knockbackDistance;
-
-            if (isValidPosition(newX, newY)) {
-                this.x = newX;
-                this.y = newY;
-                setPosition(newX, newY);
-            }
         }
     }
-
-    private boolean isValidPosition(double newX, double newY) {
-        // Implement boundary checks
-        return true;
-    }
-    void markForRemoval() {
+    // This method is used to remove enemy objects from the game. This is done
+    // when they have <= 0 health, the next age has begun, or the game
+    // is reset.
+    public void markForRemoval() {
         shouldBeRemoved = true;
     }
-    public boolean shouldBeRemoved() {
-        return shouldBeRemoved;
-    }
+    // Used for collisions
     public Rectangle2D getBoundingBox() {
         return boundingBox;
     }
+    // Used for visual representation
     public Node getImageView() {
         return imageView;
     }
@@ -102,6 +93,9 @@ public abstract class Enemy {
 
     public Rectangle getDebugBoundingBox() {
         return debugBoundingBox;
+    }
+    public boolean shouldBeRemoved() {
+        return shouldBeRemoved;
     }
 
 }

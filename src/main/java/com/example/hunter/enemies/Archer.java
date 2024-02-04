@@ -46,8 +46,7 @@ public class Archer extends Enemy implements RangedEnemy {
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
     }
-
-
+    // This method is used to fire projectiles after a certain time period.
     public void fireProjectile(Player player) {
         long currentTime = System.currentTimeMillis();
 

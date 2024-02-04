@@ -23,7 +23,7 @@ public class SuperSoldier extends Soldier {
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
     }
-
+    // This method is used to fire projectiles after a certain time period.
     @Override
     public void fireProjectile(Player player) {
 

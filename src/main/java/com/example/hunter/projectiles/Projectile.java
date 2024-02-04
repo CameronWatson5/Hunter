@@ -36,7 +36,8 @@ public abstract class Projectile {
         return firedByPlayer;
     }
 
-
+    // sets up the visual representation of the projectile and creates a bounding box
+    // which is used for collisions.
     protected abstract void setupProjectile();
 
     public void update() {

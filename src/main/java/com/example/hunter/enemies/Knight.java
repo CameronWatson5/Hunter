@@ -41,7 +41,7 @@ public class Knight extends Enemy {
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-
+    // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {
 
@@ -69,21 +69,7 @@ public class Knight extends Enemy {
             updateAnimationFrame();
         }
     }
-
-    @Override
-    public void receiveDamage(int damage, Player player) {
-        health -= damage;
-        if (health <= 0) {
-            markForRemoval();
-        } else {
-            applyKnockback(player);
-        }
-    }
-
-    @Override
-    public Rectangle getDebugBoundingBox() {
-        return debugBoundingBox;
-    }
+    // This method cycles through the animation of the sprite sheet
     private void updateAnimationFrame() {
         frameCounter++;
         // speed of animation

@@ -18,7 +18,12 @@ public abstract class Enemy {
     protected Rectangle debugBoundingBox; // used for bug testing
     protected double x, y;
     protected double speed;
+    protected int frameCounter;
     protected int health;
+    protected int currentFrameIndex;
+    protected int TOTAL_FRAMES;
+    protected int FRAME_WIDTH;
+    protected int FRAME_HEIGHT;
 
     public Enemy(double x, double y, double speed, int initialHealth) {
         this.x = x;
@@ -32,9 +37,17 @@ public abstract class Enemy {
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
     }
-    public abstract void update(Player player);
 
+    // The update method is a loop that keeps track of the enemy's state.
+    public abstract void update(Player player);
+    // The receiveDamage method allows the player to hurt the enemy
     public void receiveDamage(int damage, Player player) {
+        health -= damage;
+        if (health <= 0) {
+            markForRemoval();
+        } else {
+            applyKnockback(player);
+        }
     }
 
     void applyKnockback(Player player) {
@@ -86,5 +99,9 @@ public abstract class Enemy {
     public void setX(double enemyX) {
         x = enemyX;
     }
-    public abstract Rectangle getDebugBoundingBox();
+
+    public Rectangle getDebugBoundingBox() {
+        return debugBoundingBox;
+    }
+
 }

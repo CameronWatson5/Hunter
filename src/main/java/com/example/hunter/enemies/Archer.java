@@ -72,6 +72,7 @@ public class Archer extends Enemy implements RangedEnemy {
             }
         }
     }
+    // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {
 
@@ -101,24 +102,7 @@ public class Archer extends Enemy implements RangedEnemy {
             updateAnimationFrame();
         }
     }
-
-    @Override
-    public void receiveDamage(int damage, Player player) {
-
-        health -= damage;
-
-        if (health <= 0) {
-            markForRemoval();
-        } else {
-            //isKnockedBack=true;
-            applyKnockback(player);
-        }
-    }
-
-    @Override
-    public Rectangle getDebugBoundingBox() {
-        return debugBoundingBox;
-    }
+    // This method cycles through the animation of the sprite sheet
     private void updateAnimationFrame() {
         frameCounter++;
         // speed of animation

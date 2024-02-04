@@ -12,7 +12,6 @@ public class SuperSoldier extends Soldier {
     private static final int FRAME_WIDTH = 102;
     private static final int FRAME_HEIGHT = 102;
     GameController gameController;
-
     public SuperSoldier(double x, double y, double speed, int initialHealth, GameController gameController) {
         super(x, y, speed, initialHealth, gameController);
         this.gameController = gameController;

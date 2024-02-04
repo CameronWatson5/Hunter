@@ -13,6 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 public class Apple {
     private final double x;
     private final double y;
@@ -29,7 +31,7 @@ public class Apple {
         this.boundingBox = new Rectangle(x, y, 75, 75);
 
         // load image
-        Image image = new Image(getClass().getResourceAsStream("/images/Apple.png"));
+        Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Apple.png")));
         this.imageView = new ImageView(image);
 
         this.imageView.setFitWidth(75);

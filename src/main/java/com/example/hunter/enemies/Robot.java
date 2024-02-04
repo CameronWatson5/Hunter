@@ -15,7 +15,7 @@ public class Robot extends Ned{
     public Robot(double x, double y, double speed, int initialHealth){
     super(x, y, speed, initialHealth);
 
-    // laod the sprite sheet
+    // load the sprite sheet
     Image spriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Robot.png")));
 
         this.imageView = new ImageView(spriteSheet);

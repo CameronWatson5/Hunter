@@ -7,13 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added new enemies and the lazer projectile">
+    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Refactoring">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" afterDir="false" />
@@ -29,19 +26,10 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/RangedEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/RangedEnemy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/KnightLeft.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/images/KnightRight.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +134,7 @@
       <workItem from="1706829256054" duration="6805000" />
       <workItem from="1706975837763" duration="25000" />
       <workItem from="1706986174961" duration="1629000" />
-      <workItem from="1706987874020" duration="6862000" />
+      <workItem from="1706987874020" duration="9566000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -236,7 +224,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706992399740</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Refactoring">
+      <option name="closed" value="true" />
+      <created>1707008685100</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707008685100</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -249,6 +245,7 @@
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Added comments" />
     <MESSAGE value="Added new enemies and the lazer projectile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new enemies and the lazer projectile" />
+    <MESSAGE value="Refactoring" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactoring" />
   </component>
 </project>

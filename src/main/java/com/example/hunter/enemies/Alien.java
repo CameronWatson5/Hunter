@@ -1,3 +1,9 @@
+/*
+This is the Alien class. It is a subclass of the Boss abstract class, which itself
+is a subclass of the Enemy abstract superclass. The Alien appears as the
+boss in the Future Age.
+ */
+
 package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;
@@ -21,7 +27,7 @@ public class Alien extends Boss{
     public Alien(double x, double y, double speed, int initialHealth,  GameController gameController) {
         super(x, y, speed, initialHealth, gameController);
 
-        // laod sprite sheet
+        // load sprite sheet
         Image spriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Alien.png")));
 
         this.imageView = new ImageView(spriteSheet);
@@ -38,6 +44,7 @@ public class Alien extends Boss{
         isKnockedBack = false;
     }
 
+    // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {
 
@@ -65,21 +72,7 @@ public class Alien extends Boss{
             updateAnimationFrame();
         }
     }
-
-    @Override
-    public void receiveDamage(int damage, Player player) {
-        health -= damage;
-        if (health <= 0) {
-            markForRemoval();
-        } else {
-            applyKnockback(player);
-        }
-    }
-
-    @Override
-    public Rectangle getDebugBoundingBox() {
-        return debugBoundingBox;
-    }
+    // This method cycles through the animation of the sprite sheet
     private void updateAnimationFrame() {
         frameCounter++;
         // speed of animation

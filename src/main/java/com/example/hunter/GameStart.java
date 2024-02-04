@@ -56,9 +56,7 @@ public class GameStart extends Application {
         popupStage.initModality(Modality.APPLICATION_MODAL);
         popupStage.setTitle("Hunter");
 
-        popupStage.maximizedProperty().addListener((obs, oldMaximized, newMaximized) -> {
-            primaryStage.setMaximized(newMaximized);
-        });
+        popupStage.maximizedProperty().addListener((obs, oldMaximized, newMaximized) -> primaryStage.setMaximized(newMaximized));
 
         Image bgImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/extra.png")));
         BackgroundImage backgroundImage = new BackgroundImage(bgImage,

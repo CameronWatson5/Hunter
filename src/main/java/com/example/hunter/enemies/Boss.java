@@ -14,20 +14,23 @@ public abstract class Boss extends Enemy {
         super(x, y, speed, initialHealth);
         this.gameController = gameController;
     }
+    // The receiveDamage method allows the player to hurt the enemy
     @Override
     public void receiveDamage(int damage, Player player) {
         super.receiveDamage(damage, player);
         if (this.health <= 0) {
             onBossDefeated();
+        }else{
+            applyKnockback(player);
         }
     }
-
     public void onBossDefeated() {
         // Notify GameController when the boss is defeated
         if (this.gameController != null) {
             this.gameController.setBossDefeated(true);
         }
     }
+    // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {
     }

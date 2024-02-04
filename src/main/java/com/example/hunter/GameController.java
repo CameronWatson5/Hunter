@@ -28,17 +28,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.event.ActionEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-
-import java.net.URL;
-import java.util.*;
-
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.*;
 
 public class GameController {
     @FXML
@@ -66,17 +64,15 @@ public class GameController {
     private boolean bossDefeated;
     private boolean isGameOver = false;
     private static GameState gameState; // An enum for game states
-    private List<Apple> apples = new ArrayList<>(); // used for apple objects.
+    private final List<Apple> apples = new ArrayList<>(); // used for apple objects.
 
-    private int initialPlayerX = 400;
-    private int initialPlayerY = 400;
-    private boolean debugMode = false;
+    private final int initialPlayerX = 400;
+    private final int initialPlayerY = 400;
     private List<ScoreEntry> scoreList = new ArrayList<>();
 
     private boolean bossSpawned;
     private long lastPauseTime = 0;
-    private Scene scene;
-    private Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is used so multiple buttons can be pressed
+    private final Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is used so multiple buttons can be pressed
     public void initialize() {
         bossSpawned = false;
         bossDefeated = false;
@@ -104,6 +100,7 @@ public class GameController {
         if (!gamePane.getChildren().contains(characterView)) {
             gamePane.getChildren().add(characterView);
         }
+        boolean debugMode = false;
         if (debugMode && !gamePane.getChildren().contains(player.getDebugBoundingBox())) {
             gamePane.getChildren().add(player.getDebugBoundingBox());
         }
@@ -119,7 +116,6 @@ public class GameController {
         gamePane.requestFocus();
     }
     public void setScene(Scene scene) {
-        this.scene = scene; // Set the Scene in your GameController
     }
 
     public ArrayList<Enemy> getEnemies() {
@@ -178,10 +174,10 @@ public class GameController {
                     enemy = new Archer(x, y, 1, 8, this);
                     break;
                 case 1:
-                    enemy = new Knight(x, y, 3, 12, gamePane.getWidth(), gamePane.getHeight(), gamePane);
+                    enemy = new Knight(x, y, 3.5, 12);
                     break;
                 case 2:
-                    enemy = new Peasant(x, y, 3.5, 8);
+                    enemy = new Peasant(x, y, 3, 8);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected enemy type: " + enemyType);
@@ -473,7 +469,7 @@ public class GameController {
     }
     void updateHealthBar() {
         if (player != null) {
-            double healthPercentage = (double) player.getHealth() / player.getMaxHealth();
+            double healthPercentage = player.getHealth() / player.getMaxHealth();
             healthBar.setProgress(healthPercentage);
             healthLabel.setText(String.format("%.0f", player.getHealth())); // Update label
         }
@@ -620,7 +616,7 @@ public class GameController {
     public void createLaserProjectile(double x, double y, double directionX, double directionY, double projectileSpeed, int damage, boolean b) {
         double speed = 8;
         boolean firedByPlayer = false;
-        Projectile projectile = new Bullet(x, y, directionX, directionY, speed, damage, firedByPlayer);
+        Projectile projectile = new Laser(x, y, directionX, directionY, speed, damage, firedByPlayer);
         this.projectiles.add(projectile);
         addProjectileToGame(projectile);
     }
@@ -705,29 +701,28 @@ public class GameController {
 
     private void changeGameElementsForAge() {
         String ageText = "";
-        String backgroundImageUrl = "";
-        switch (currentAge) {
-            case STONE_AGE:
+        String backgroundImageUrl = switch (currentAge) {
+            case STONE_AGE -> {
                 ageText = "Stone Age";
-                backgroundImageUrl = "/images/stoneAgeBackground.png";
-                break;
-            case CLASSICAL_AGE:
+                yield "/images/stoneAgeBackground.png";
+            }
+            case CLASSICAL_AGE -> {
                 ageText = "Classical Age";
-                backgroundImageUrl = "/images/classicalAgeBackground.png";
-                break;
-            case MEDIEVAL_AGE:
+                yield "/images/classicalAgeBackground.png";
+            }
+            case MEDIEVAL_AGE -> {
                 ageText = "Medieval Age";
-                backgroundImageUrl = "/images/medievalAgeBackground.png";
-                break;
-            case MODERN_AGE:
+                yield "/images/medievalAgeBackground.png";
+            }
+            case MODERN_AGE -> {
                 ageText = "Modern Age";
-                backgroundImageUrl = "/images/modernAgeBackground.png";
-                break;
-            case FUTURE_AGE:
+                yield "/images/modernAgeBackground.png";
+            }
+            case FUTURE_AGE -> {
                 ageText = "Future Age";
-                backgroundImageUrl = "/images/futureAgeBackground.png";
-                break;
-        }
+                yield "/images/futureAgeBackground.png";
+            }
+        };
         updateBackgroundImage(backgroundImageUrl);
         String finalAgeText = ageText;
         Platform.runLater(() -> ageDisplayLabel.setText("Current Age: " + finalAgeText));
@@ -743,7 +738,7 @@ public class GameController {
         layout.setAlignment(Pos.CENTER);
 
         for (ScoreEntry entry : scoreList) {
-            Label scoreLabel = new Label(entry.getPlayerName() + ": " + entry.getScore());
+            Label scoreLabel = new Label(entry.playerName() + ": " + entry.score());
             layout.getChildren().add(scoreLabel);
         }
 
@@ -792,20 +787,13 @@ public class GameController {
             return false; // Boss already spawned, don't spawn again
         }
         // Spawn boss based on score thresholds and current age
-        switch (currentAge) {
-            case STONE_AGE:
-                return score >= 20;
-            case CLASSICAL_AGE:
-                return score >= 40;
-            case MEDIEVAL_AGE:
-                return score >= 120;
-            case MODERN_AGE:
-                return score >= 200;
-            case FUTURE_AGE:
-                return score >= 220;
-            default:
-                return false;
-        }
+        return switch (currentAge) {
+            case STONE_AGE -> score >= 20;
+            case CLASSICAL_AGE -> score >= 40;
+            case MEDIEVAL_AGE -> score >= 120;
+            case MODERN_AGE -> score >= 200;
+            case FUTURE_AGE -> score >= 220;
+        };
     }
 
     private void transitionToNextAge() {
@@ -818,40 +806,32 @@ public class GameController {
         double x, y;
         int edge = (int) (Math.random() * 4); // 0: top, 1: right, 2: bottom, 3: left
 
-        switch (edge) {
-            case 0: // top
+        y = switch (edge) {
+            case 0 -> { // top
                 x = Math.random() * gamePane.getWidth();
-                y = 0;
-                break;
-            case 1: // right
+                yield 0;
+            }
+            case 1 -> { // right
                 x = gamePane.getWidth();
-                y = Math.random() * gamePane.getHeight();
-                break;
-            case 2: // bottom
+                yield Math.random() * gamePane.getHeight();
+            }
+            case 2 -> { // bottom
                 x = Math.random() * gamePane.getWidth();
-                y = gamePane.getHeight();
-                break;
-            case 3: // left
+                yield gamePane.getHeight();
+            }
+            case 3 -> { // left
                 x = 0;
-                y = Math.random() * gamePane.getHeight();
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + edge);
-        }
-        switch (currentAge) {
-            case STONE_AGE:
-                return new BigDino(x,y,4,20, this);
-            case CLASSICAL_AGE:
-                return new Cerberus(x,y,5,20, this);
-            case MEDIEVAL_AGE:
-                return new Bunny(x,y,10,20, this);
-            case MODERN_AGE:
-                return new Tank(x,y,2,40, this);
-            case FUTURE_AGE:
-                return new Alien(x,y,2,100, this);
-            default:
-                throw new IllegalStateException("Unknown Age: " + currentAge);
-        }
+                yield Math.random() * gamePane.getHeight();
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + edge);
+        };
+        return switch (currentAge) {
+            case STONE_AGE -> new BigDino(x, y, 4, 20, this);
+            case CLASSICAL_AGE -> new Cerberus(x, y, 5, 20, this);
+            case MEDIEVAL_AGE -> new Bunny(x, y, 10, 20, this);
+            case MODERN_AGE -> new Tank(x, y, 2, 40, this);
+            case FUTURE_AGE -> new Alien(x, y, 2, 1000, this);
+        };
     }
     public void setBossDefeated(boolean defeated) {
         this.bossDefeated = defeated;

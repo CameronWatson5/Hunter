@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_INJECTED_CODE" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added comments">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/RangedEnemy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" afterDir="false" />
+    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added new enemies and the lazer projectile">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Apple.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/ScoreEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" afterDir="false" />
@@ -28,13 +29,19 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Ned.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Peasant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Police.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/RangedEnemy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/RangedEnemy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Robot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Soldier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/SuperSoldier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Tank.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Arrow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Bullet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Laser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Projectile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/projectiles/Rocket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/KnightLeft.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/images/KnightRight.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,27 +75,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/cswat/IdeaProjects/Hunter/src/main/java/com/example/hunter&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.14482759&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "jdk.selected.JAVA_MODULE": "21",
+    "last_directory_selection": "C:/Users/cswat/IdeaProjects/Hunter/src/main/java/com/example/hunter",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "SDKs",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.14482759",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="com.example.hunter.projectiles" />
@@ -138,7 +146,7 @@
       <workItem from="1706829256054" duration="6805000" />
       <workItem from="1706975837763" duration="25000" />
       <workItem from="1706986174961" duration="1629000" />
-      <workItem from="1706987874020" duration="2371000" />
+      <workItem from="1706987874020" duration="6862000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -220,7 +228,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706831178968</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added new enemies and the lazer projectile">
+      <option name="closed" value="true" />
+      <created>1706992399740</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706992399740</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -232,6 +248,7 @@
     <MESSAGE value="Added Projectile.java" />
     <MESSAGE value="Initial Commit" />
     <MESSAGE value="Added comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added comments" />
+    <MESSAGE value="Added new enemies and the lazer projectile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new enemies and the lazer projectile" />
   </component>
 </project>

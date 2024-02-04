@@ -21,10 +21,9 @@ public class Archer extends Enemy implements RangedEnemy {
     private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
     private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
     private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
     private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
-    private GameController gameController;
+    private final boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
+    private final GameController gameController;
     long lastProjectileTime = 0; // This is used to determine when a projectile has been fired.
     long projectileCooldown = 15000; // This determines the reload time
 
@@ -122,6 +121,8 @@ public class Archer extends Enemy implements RangedEnemy {
     }
     private void updateAnimationFrame() {
         frameCounter++;
+        // speed of animation
+        int frameDelay = 10;
         if (frameCounter >= frameDelay) {
             currentFrameIndex = (currentFrameIndex + 1) % TOTAL_FRAMES;
             imageView.setViewport(new Rectangle2D(currentFrameIndex * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));

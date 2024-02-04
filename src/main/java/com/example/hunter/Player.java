@@ -24,15 +24,13 @@ import java.util.Random;
 
 public class Player {
     private boolean invincible = false; // after player is hit, they are invincible for a short time
-    private Rectangle debugBoundingBox;
+    private final Rectangle debugBoundingBox;
     boolean debugMode = false; // This is used to see the hit boxes of objects
-    private long invincibilityDuration = 1000; // Invincibility duration
     private static final int PLAYER_WIDTH = 102; // pixel width
     private static final int PLAYER_HEIGHT = 102; // pixel height
 
-    private GameController gameController;
-    private ImageView characterView;
-    private Image image;
+    private final GameController gameController;
+    private final ImageView characterView;
     private Timeline timeline;
     private Image spriteSheetUp;
     private Image spriteSheetDown;
@@ -46,13 +44,8 @@ public class Player {
     private Image attackSpriteSheetLeft;
     private Image attackSpriteSheetRight;
 
-    private Rectangle2D attackArea; // used during attacks
-
-    private int attackDamage = 4; // damage
     private double health = 100; // when 0, player dies
-    private double maxHealth = 100;
     private long lastProjectileTime = 0; // Time when the last projectile was fired
-    private long projectileCooldown = 500; // Cooldown time in milliseconds
 
     public void receiveDamage(int damage) {
         if (!invincible) {
@@ -62,10 +55,12 @@ public class Player {
             }
             invincible = true;
 
+            // Invincibility duration
+            long invincibilityDuration = 1000;
             PauseTransition pause = new PauseTransition(Duration.millis(invincibilityDuration));
             pause.setOnFinished(event -> invincible = false);
             pause.play();
-            Platform.runLater(() -> gameController.updateHealthBar());
+            Platform.runLater(gameController::updateHealthBar);
         }
     }
     public Player(ImageView characterView, String imagePath, GameController gameController) {
@@ -77,7 +72,7 @@ public class Player {
         if (stream == null) {
             throw new IllegalArgumentException("Resource not found: " + imagePath);
         }
-        this.image = new Image(stream);
+        Image image = new Image(stream);
         characterView.setImage(image);
         loadSpriteSheets();
         loadAttackSpriteSheets();
@@ -114,6 +109,8 @@ public class Player {
     }
     public void fireProjectile() {
         long currentTime = System.currentTimeMillis(); // Get the current time
+        // Cooldown time in milliseconds
+        long projectileCooldown = 500;
         if (currentTime - lastProjectileTime >= projectileCooldown) {
 
             lastProjectileTime = currentTime; // Update the last projectile time
@@ -174,7 +171,8 @@ public class Player {
             }
 
             // Initialize the attack area
-            attackArea = new Rectangle2D(getX() + offsetX, getY() + offsetY, attackWidth, attackHeight);
+            // used during attacks
+            Rectangle2D attackArea = new Rectangle2D(getX() + offsetX, getY() + offsetY, attackWidth, attackHeight);
 
             ImageView attackAnimationView = new ImageView(weaponSpriteSheet);
             final int frameCount = 2;
@@ -195,8 +193,6 @@ public class Player {
             attackAnimationView.setLayoutX(getX() + offsetX);
             attackAnimationView.setLayoutY(getY() + offsetY);
             Random rand = new Random();
-            double UpWeaponAdjustmentY = 0;
-            double DownWeaponAdjustmentY = 0;
             double RightWeaponAdjustmentX = -30;
             double LeftWeaponAdjustmentX = 30;
             switch (currentDirection) {
@@ -254,6 +250,8 @@ public class Player {
             ArrayList<Enemy> enemies = gameController.getEnemies();
             for (Enemy enemy : gameController.getEnemies()) {
                 if (attackArea.intersects(enemy.getBoundingBox())) {
+                    // damage
+                    int attackDamage = 4;
                     enemy.receiveDamage(attackDamage, this);
                     //System.out.println("Enemy hit!");
                 }
@@ -284,29 +282,6 @@ public class Player {
                     standStill();
                 }
             })).play();
-        }
-    }
-    private void transitionToNextAnimation() {
-        System.out.println("Transitioning animation. Current direction: " + currentDirection + ", Attacking: " + isAttacking);
-        if (isAttacking) {
-            isAttacking = false;
-            switch (currentDirection) {
-                case RIGHT:
-                    walkRight();
-                    break;
-                case LEFT:
-                    walkLeft();
-                    break;
-                case UP:
-                    walkUp();
-                    break;
-                case DOWN:
-                    walkDown();
-                    break;
-                default:
-                    standStill();
-                    break;
-            }
         }
     }
     private void setupStandingAnimation() {
@@ -425,7 +400,7 @@ public class Player {
         return health;
     }
     public double getMaxHealth() {
-        return maxHealth;
+        return 100;
     }
     public void setHealth(double maxHealth) {
         health = maxHealth;

@@ -19,9 +19,9 @@ public class Centurion extends Enemy {
     private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
     private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
     private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
+    private final int frameDelay = 10; // speed of animation
     private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
+    private final boolean isKnockedBack; // this is used to determine if an enemy is knocked back.
 
 
     public Centurion(double x, double y, double speed, int initialHealth) {
@@ -42,6 +42,7 @@ public class Centurion extends Enemy {
         // match the sprite sheet with the object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
+        isKnockedBack = false;
     }
 
     @Override

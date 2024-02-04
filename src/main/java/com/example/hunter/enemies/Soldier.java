@@ -9,27 +9,24 @@ package com.example.hunter.enemies;
 
 import com.example.hunter.GameController;
 import com.example.hunter.Player;
-import com.example.hunter.enemies.Enemy;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
 import java.util.Objects;
 
 public class Soldier extends Enemy implements RangedEnemy{
     private int shotsFired = 0; // counts shots in a burst
-    private final int maxShots = 3; // shots in a burst
     private long lastReloadTime = 0; // beginning of pause between shot bursts
-    private final long reloadPause = 3000; // pause between shot bursts
     private static final int FRAME_WIDTH = 102; // pixel width of PNG photo
     private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
     private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
     private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
     private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
-    private GameController gameController;
+    private final boolean isKnockedBack; // this is used to determine if an enemy is knocked back.
+    private final GameController gameController;
     long lastProjectileTime = 0; // This is used to determine when a projectile has been fired.
     long projectileCooldown = 200; // This determines the reload time
 
@@ -51,13 +48,18 @@ public class Soldier extends Enemy implements RangedEnemy{
         // match the sprite sheet with the object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
+        isKnockedBack = false;
     }
 
 
     public void fireProjectile(Player player) {
         long currentTime = System.currentTimeMillis();
 
+        // shots in a burst
+        int maxShots = 3;
         if (shotsFired >= maxShots) {
+            // pause between shot bursts
+            long reloadPause = 3000;
             if (currentTime - lastReloadTime >= reloadPause) {
                 shotsFired = 0;
                 lastReloadTime = currentTime;
@@ -138,6 +140,8 @@ public class Soldier extends Enemy implements RangedEnemy{
     }
     private void updateAnimationFrame() {
         frameCounter++;
+        // speed of animation
+        int frameDelay = 10;
         if (frameCounter >= frameDelay) {
             currentFrameIndex = (currentFrameIndex + 1) % TOTAL_FRAMES;
             imageView.setViewport(new Rectangle2D(currentFrameIndex * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));

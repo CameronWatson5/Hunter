@@ -8,13 +8,8 @@ package com.example.hunter.enemies;
 import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.paint.Color;
-
-import java.util.Objects;
-import java.util.Random;
 
 public abstract class Enemy {
     protected boolean shouldBeRemoved = false; // set to true to remove object

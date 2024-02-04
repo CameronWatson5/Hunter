@@ -6,7 +6,6 @@ The Rocket is used by the Tank class.
 
 package com.example.hunter.projectiles;
 
-import com.example.hunter.projectiles.Projectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Rectangle2D;

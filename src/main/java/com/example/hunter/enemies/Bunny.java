@@ -22,12 +22,11 @@ public class Bunny extends Boss {
     private static final int FRAME_HEIGHT = 300; // pixel height of PNG photo
     private static final int TOTAL_FRAMES = 2; // animation frames in sprite sheet
     private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
     private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
+    private final boolean isKnockedBack; // this is used to determine if an enemy is knocked back.
     private double randomDirectionX = 0;
     private double randomDirectionY = 0;
-    private int movementDuration = 600;
+    int movementDuration = 600;
     private int movementTimer = 0;
 
     public Bunny(double x, double y, double speed, int initialHealth, GameController gameController) {
@@ -47,6 +46,7 @@ public class Bunny extends Boss {
         // match sprite sheet to object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
+        isKnockedBack = false;
     }
 
     @Override
@@ -65,6 +65,7 @@ public class Bunny extends Boss {
                 double length = Math.sqrt(randomDirectionX * randomDirectionX + randomDirectionY * randomDirectionY);
                 randomDirectionX /= length;
                 randomDirectionY /= length;
+
 
                 movementTimer = movementDuration;
             } else {
@@ -105,6 +106,8 @@ public class Bunny extends Boss {
 
     private void updateAnimationFrame() {
         frameCounter++;
+        // speed of animation
+        int frameDelay = 10;
         if (frameCounter >= frameDelay) {
             currentFrameIndex = (currentFrameIndex + 1) % TOTAL_FRAMES;
             imageView.setViewport(new Rectangle2D(currentFrameIndex * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));

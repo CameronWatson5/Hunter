@@ -11,11 +11,6 @@ import java.util.Objects;
 public class Robot extends Ned{
     private static final int FRAME_WIDTH = 102; // pixel width of PNG photo
     private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
-    private static final int TOTAL_FRAMES = 2; // animation frame in sprite sheet
-    private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
-    private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
 
     public Robot(double x, double y, double speed, int initialHealth){
     super(x, y, speed, initialHealth);

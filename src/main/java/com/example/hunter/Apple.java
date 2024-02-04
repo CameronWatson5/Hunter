@@ -14,10 +14,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Apple {
-    private double x, y;
-    private Rectangle boundingBox; // used for collision
-    private ImageView imageView;
-    private Pane gamePane;
+    private final double x;
+    private final double y;
+    private final Rectangle boundingBox; // used for collision
+    private final ImageView imageView;
+    private final Pane gamePane;
 
     public Apple(double x, double y, Pane gamePane) {
         this.x = x;

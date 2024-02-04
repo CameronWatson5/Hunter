@@ -6,7 +6,6 @@ The Arrow is used by the Soldier class.
 
 package com.example.hunter.projectiles;
 
-import com.example.hunter.projectiles.Projectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.geometry.Rectangle2D;
@@ -19,7 +18,7 @@ public class Bullet extends Projectile {
     private static final int FRAME_HEIGHT = 10; // pixel height
     private static final int TOTAL_FRAMES = 2; // animation frames
     private static final int DAMAGE = 1;
-    private static final double SPEED = 4;
+    private static final double SPEED = 3;
 
     public Bullet(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
         super(x, y, directionX, directionY, SPEED, DAMAGE, firedByPlayer);

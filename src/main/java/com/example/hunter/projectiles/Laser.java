@@ -7,20 +7,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 
-public class Laser {
-
-    public class Bullet extends Projectile {
+public class Laser extends Projectile {
         private static final int FRAME_WIDTH = 10; // pixel width
         private static final int FRAME_HEIGHT = 10; // pixel height
         private static final int TOTAL_FRAMES = 2; // animation frames
-        private static final int DAMAGE = 3;
-        private static final double SPEED = 8;
+        private static final int DAMAGE = 1;
+        private static final double SPEED = 4;
 
-        public Bullet(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
+        public Laser(double x, double y, double directionX, double directionY, double speed, int damage, boolean firedByPlayer) {
             super(x, y, directionX, directionY, SPEED, DAMAGE, firedByPlayer);
 
             setupProjectile();
         }
+
 
         @Override
         protected void setupProjectile() {
@@ -52,4 +51,3 @@ public class Laser {
             imageView.setViewport(new Rectangle2D(column * FRAME_WIDTH, row * FRAME_HEIGHT, FRAME_WIDTH, FRAME_HEIGHT));
         }
     }
-}

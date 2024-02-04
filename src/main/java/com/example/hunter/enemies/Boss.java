@@ -28,8 +28,6 @@ public abstract class Boss extends Enemy {
             this.gameController.setBossDefeated(true);
         }
     }
-
-
     @Override
     public void update(Player player) {
     }

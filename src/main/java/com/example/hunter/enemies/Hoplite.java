@@ -6,7 +6,6 @@ The Hoplite appears in the Classical Age.
 package com.example.hunter.enemies;
 
 import com.example.hunter.Player;
-import com.example.hunter.enemies.Enemy;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,9 +19,8 @@ public class Hoplite extends Enemy {
     private static final int FRAME_HEIGHT = 102; // pixel height of PNG photo
     private static final int TOTAL_FRAMES = 5; // animation frame in sprite sheet
     private int frameCounter = 0; // animation begins at 0
-    private int frameDelay = 10; // speed of animation
     private int currentFrameIndex = 0; // current animation
-    private boolean isKnockedBack = false; // this is used to determine if an enemy is knocked back.
+    private final boolean isKnockedBack; // this is used to determine if an enemy is knocked back.
     private static final long APPROACH_DURATION = 4000; // 4 seconds in milliseconds
     private static final long RETREAT_DURATION = 1000; // 1 second in milliseconds
     private State currentState; // e.g. approaching or retreating
@@ -49,6 +47,7 @@ public class Hoplite extends Enemy {
         currentState = State.APPROACHING; // Start with approaching
         lastStateChangeTime = System.currentTimeMillis();
 
+        isKnockedBack = false;
     }
 
     @Override
@@ -110,6 +109,8 @@ public class Hoplite extends Enemy {
     }
     private void updateAnimationFrame() {
         frameCounter++;
+        // speed of animation
+        int frameDelay = 10;
         if (frameCounter >= frameDelay) {
             currentFrameIndex = (currentFrameIndex + 1) % TOTAL_FRAMES;
             imageView.setViewport(new Rectangle2D(currentFrameIndex * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT));

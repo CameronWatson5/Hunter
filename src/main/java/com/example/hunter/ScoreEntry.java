@@ -11,22 +11,7 @@ import java.util.List;
 import java.util.prefs.Preferences;
 import java.util.stream.Collectors;
 
-public class ScoreEntry implements Comparable<ScoreEntry> {
-    private final String playerName;
-    private final int score;
-
-    public ScoreEntry(String playerName, int score) {
-        this.playerName = playerName;
-        this.score = score;
-    }
-
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public int getScore() {
-        return score;
-    }
+public record ScoreEntry(String playerName, int score) implements Comparable<ScoreEntry> {
 
     @Override
     public int compareTo(ScoreEntry other) {
@@ -37,7 +22,7 @@ public class ScoreEntry implements Comparable<ScoreEntry> {
     public static void saveScores(List<ScoreEntry> scores) {
         Preferences prefs = Preferences.userNodeForPackage(ScoreEntry.class);
         String scoresString = scores.stream()
-                .map(entry -> entry.getPlayerName() + ":" + entry.getScore())
+                .map(entry -> entry.playerName() + ":" + entry.score())
                 .collect(Collectors.joining(","));
         prefs.put("scores", scoresString);
     }

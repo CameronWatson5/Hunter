@@ -15,7 +15,7 @@ public class SuperSoldier extends Soldier {
 
     public SuperSoldier(double x, double y, double speed, int initialHealth, GameController gameController) {
         super(x, y, speed, initialHealth, gameController);
-
+        this.gameController = gameController;
         // Override the sprite sheet for SuperSoldier
         Image spriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/SuperSoldier.png")));
         this.imageView = new ImageView(spriteSheet);

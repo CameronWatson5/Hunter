@@ -65,5 +65,9 @@ Pause - Q
 ![enemies Package](https://github.com/CameronWatson5/Hunter/assets/145788750/c92af398-1485-4102-84a3-f93a12fb7908)
 ### Projectiles package:
 ![projectiles Package (1)](https://github.com/CameronWatson5/Hunter/assets/145788750/06fe9971-2889-4ffd-b12d-e1b6dcee834c)
+## Credits
+Sound Effect by <a href="https://pixabay.com/users/lordsonny-38439655/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=184891">LordSonny</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=184891">Pixabay</a>
+Other Sound Effects by from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=184891">Pixabay</a>
+
 
 

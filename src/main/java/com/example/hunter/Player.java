@@ -32,12 +32,12 @@ public class Player {
     private final GameController gameController;
     private final ImageView characterView;
     private Timeline timeline;
-    private Image spriteSheetUp;
-    private Image spriteSheetDown;
-    private Image spriteSheetLeft;
-    private Image spriteSheetRight;
-    private Image weaponSpriteSheet;
-    private Direction currentDirection = Direction.STANDING;
+    private Image spriteSheetUp; // sprite sheet when moving up
+    private Image spriteSheetDown; // sprite sheet when moving down
+    private Image spriteSheetLeft; // sprite sheet when moving left
+    private Image spriteSheetRight; // sprite sheet when moving right
+    private Image weaponSpriteSheet; // sprite sheet for sword
+    private Direction currentDirection = Direction.DOWN; // Keeps track of the current direction
     private boolean isAttacking = false;
     private Image attackSpriteSheetUp;
     private Image attackSpriteSheetDown;

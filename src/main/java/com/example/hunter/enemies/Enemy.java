@@ -49,21 +49,7 @@ public abstract class Enemy {
             applyKnockback(player);
         }
     }
-    // This method knocks the enemy back away from the player by 100 pixels.
-    void applyKnockback(Player player) {
-        double knockbackDistance = 100;
-        double deltaX = this.x - player.getX();
-        double deltaY = this.y - player.getY();
-        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
-        if (distance != 0) { // Check to avoid division by zero
-            double dirX = deltaX / distance;
-            double dirY = deltaY / distance;
-
-            double newX = this.x + dirX * knockbackDistance;
-            double newY = this.y + dirY * knockbackDistance;
-        }
-    }
     // This method is used to remove enemy objects from the game. This is done
     // when they have <= 0 health, the next age has begun, or the game
     // is reset.
@@ -97,5 +83,22 @@ public abstract class Enemy {
     public boolean shouldBeRemoved() {
         return shouldBeRemoved;
     }
+    // This method knocks the enemy back away from the player by 100 pixels.
+    public void applyKnockback(Player player) {
+        double knockbackDistance = 100;
+        double deltaX = this.x - player.getX();
+        double deltaY = this.y - player.getY();
+        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
 
+        if (distance != 0) { // Check to avoid division by zero
+            double dirX = deltaX / distance;
+            double dirY = deltaY / distance;
+
+            this.x += dirX * knockbackDistance; // Update position
+            this.y += dirY * knockbackDistance;
+
+            // Update imageView position
+            setPosition(this.x, this.y);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.hunter.enemies;
 
+import com.example.hunter.Player;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

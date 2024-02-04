@@ -36,4 +36,6 @@ public abstract class Boss extends Enemy {
     @Override
     public void update(Player player) {
     }
+    // This method knocks the enemy back away from the player by 100 pixels.
+
 }

@@ -1,6 +1,6 @@
 # Description
 Hunter is a Java-based 2d action game that uses JavaFX and other libraries. This was made in Intellij IDEA, so
-it should work if you run it in that IDE.
+it should work if you run it in that IDE. Eclipse should also work
 
 ## Gameplay
 

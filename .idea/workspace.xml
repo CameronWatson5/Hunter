@@ -7,18 +7,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added sound effects">
+    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Added controls label">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameStart.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Alien.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Archer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/BigDino.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Boss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Bunny.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Bunny.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Centurion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Centurion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Cerberus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Cerberus.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Dino.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Knight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/enemies/Knight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/hunter/GameController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +119,7 @@
       <workItem from="1707062951204" duration="16000" />
       <workItem from="1707081897998" duration="3029000" />
       <workItem from="1707151113922" duration="620000" />
-      <workItem from="1707266254506" duration="344000" />
+      <workItem from="1707266254506" duration="1169000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -282,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707060436526</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Added controls label">
+      <option name="closed" value="true" />
+      <created>1707266624469</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1707266624469</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +296,7 @@
     <MESSAGE value="Refactoring" />
     <MESSAGE value="Added comments" />
     <MESSAGE value="Added sound effects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added sound effects" />
+    <MESSAGE value="Added controls label" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added controls label" />
   </component>
 </project>

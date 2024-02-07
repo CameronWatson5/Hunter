@@ -374,7 +374,7 @@ public class GameController {
     // the damage based on collision done to the player depends on the difficulty.
     private void checkCollisionWithPlayer(Enemy enemy) {
         int damage = switch (currentDifficulty) {
-            case EASY -> 1;
+            case EASY -> 5;
             case HARD -> 15;
             default -> 10;
         };

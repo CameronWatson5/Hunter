@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Made the game more difficult">
+    <list default="true" id="fe46d650-30e7-43a3-a40c-d5e39e2514f6" name="Changes" comment="Add JAR">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Hunter_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +59,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.14482759",
     "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
@@ -120,7 +121,7 @@
       <workItem from="1707151113922" duration="620000" />
       <workItem from="1707266254506" duration="2680000" />
       <workItem from="1707319495036" duration="12000" />
-      <workItem from="1707323701274" duration="123000" />
+      <workItem from="1707323701274" duration="2363000" />
     </task>
     <task id="LOCAL-00001" summary="Added character and movement">
       <option name="closed" value="true" />
@@ -298,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707309268126</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add JAR">
+      <option name="closed" value="true" />
+      <created>1707323859006</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1707323859006</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,6 +324,7 @@
     <MESSAGE value="Added sound effects" />
     <MESSAGE value="Added controls label" />
     <MESSAGE value="Made the game more difficult" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made the game more difficult" />
+    <MESSAGE value="Add JAR" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add JAR" />
   </component>
 </project>

@@ -43,7 +43,7 @@ Pause - Q
 ## Installation:
  - Step 1: Download zip file
  - Step 2: Unzip file
- - Step 3: put unziped file into your Java IDE directory
+ - Step 3: put unziped file into your Java IDE directory (For example Intellij IDEA or eclipse).
  - Step 4: run the file StartGame located inside of src/java/com.example.hunter
  - Step 5: this will install the dependencies, which may take some time.
  - Step 6: play the game.

@@ -1,6 +1,6 @@
 # Description
 Hunter is a Java-based 2d action game that uses JavaFX and other libraries. This was made in Intellij IDEA, so
-it should work if you run it in that IDE.
+it should work if you run it in that IDE. Eclipse should also work
 
 ## Gameplay
 
@@ -39,6 +39,16 @@ Attack - Space
 Projectile - Z
 
 Pause - Q
+
+## Installation:
+ - Step 1: Download zip file
+ - Step 2: Unzip file
+ - Step 3: put unziped file into your Java IDE directory (For example Intellij IDEA or eclipse).
+ - Step 4: run the file StartGame located inside of src/java/com.example.hunter
+ - Step 5: this will install the dependencies, which may take some time.
+ - Step 6: play the game.
+
+   Note: if it does not work, then try running it again and make sure the file is unziped!
 
 ## Software Requirements:
 - Java: The application is using with Java.

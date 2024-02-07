@@ -40,6 +40,16 @@ Projectile - Z
 
 Pause - Q
 
+## Installation:
+ - Step 1: Download zip file
+ - Step 2: Unzip file
+ - Step 3: put unziped file into your Java IDE directory
+ - Step 4: run the file StartGame located inside of src/java/com.example.hunter
+ - Step 5: this will install the dependencies, which may take some time.
+ - Step 6: play the game.
+
+   Note: if it does not work, then try running it again and make sure the file is unziped!
+
 ## Software Requirements:
 - Java: The application is using with Java.
 - JavaFX: This project uses JavaFX for its GUI.

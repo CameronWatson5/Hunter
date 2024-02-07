@@ -2,7 +2,7 @@
 This is the Alien class. It is a subclass of the Boss abstract class, which itself
 is a subclass of the Enemy abstract superclass. The Alien appears as the
 boss in the Future Age.
- */
+*/
 
 package com.example.hunter.enemies;
 
@@ -38,12 +38,12 @@ public class Alien extends Boss{
         this.debugBoundingBox.setStroke(Color.TRANSPARENT); // Red border for visibility
         this.debugBoundingBox.setFill(Color.TRANSPARENT); // Transparent fill
 
-        // match sprite to object's positiob
+        // match sprite to object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-    // The update method is a loop that keeps track of the enemy's state.
+    // The update method is a loop that keeps track of the enemy's movement state and x/y position.
     @Override
     public void update(Player player) {
 

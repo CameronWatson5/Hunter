@@ -1,6 +1,7 @@
 /*
 This is the Dino class, it is a subclass of the Enemy abstract superclass.
-The Dino appears in the Stone Age.
+The Dino appears in the Stone Age and the Future Age.
+In the Future Age, the Dino has improved statistics.
 The Dino class is unique from other enemies, as when it is constructed,
 it will randomly select a spriteSheet to use.
 */

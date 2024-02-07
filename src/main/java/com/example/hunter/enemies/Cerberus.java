@@ -24,10 +24,10 @@ public class Cerberus extends Boss {
     private int frameCounter = 0; // animation begins at 0
     private int currentFrameIndex = 0; // current animation
     private final boolean isKnockedBack; // this is used to determine if an enemy is knocked back.
-    private double randomDirectionX = 0;
-    private double randomDirectionY = 0;
-    private final int movementDuration;
-    private int movementTimer = 0;
+    private double randomDirectionX = 0; // this class chooses a random direction
+    private double randomDirectionY = 0; // this class chooses a random direction
+    private final int movementDuration;  // the amount of time this class moves in a random direction
+    private int movementTimer = 0;  // start of the time that this class moves in a random direction
 
     public Cerberus(double x, double y, double speed, int initialHealth,  GameController gameController) {
         super(x, y, speed, initialHealth, gameController);

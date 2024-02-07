@@ -82,5 +82,3 @@ public class Centurion extends Enemy {
         }
     }
 }
-
-

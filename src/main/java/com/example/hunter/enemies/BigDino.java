@@ -26,7 +26,7 @@ public class BigDino extends Boss {
     public BigDino(double x, double y, double speed, int initialHealth,  GameController gameController) {
         super(x, y, speed, initialHealth, gameController);
 
-        // laod sprite sheet
+        // load sprite sheet
         Image spriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/BigDino.png")));
 
         this.imageView = new ImageView(spriteSheet);
@@ -34,15 +34,15 @@ public class BigDino extends Boss {
 
         // create a debug box
         this.debugBoundingBox = new Rectangle(x, y, FRAME_WIDTH, FRAME_HEIGHT);
-        this.debugBoundingBox.setStroke(Color.TRANSPARENT); // Red border for visibility
-        this.debugBoundingBox.setFill(Color.TRANSPARENT); // Transparent fill
+        this.debugBoundingBox.setStroke(Color.TRANSPARENT);
+        this.debugBoundingBox.setFill(Color.TRANSPARENT);
 
-        // match sprite to object's positiob
+        // match sprite to object's position
         this.imageView.setLayoutX(this.x);
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
-    // The update method is a loop that keeps track of the enemy's state.
+    // The update method is a loop that keeps track of the enemy's movement state and position.
     @Override
     public void update(Player player) {
 

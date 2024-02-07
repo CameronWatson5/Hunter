@@ -2,7 +2,7 @@
 This is the Archer class, it is a subclass of the Enemy abstract superclass.
 The Archer appears in the Medieval Age.
 This class has the ability to fire projectiles.
-This class used the Arrow class to fire projectiles.
+This class uses the Arrow class to fire projectiles.
 */
 
 package com.example.hunter.enemies;
@@ -74,7 +74,7 @@ public class Archer extends Enemy implements RangedEnemy {
             }
         }
     }
-    // The update method is a loop that keeps track of the enemy's state.
+    // The update method is a loop that keeps track of the enemy's movement state and position.
     @Override
     public void update(Player player) {
 

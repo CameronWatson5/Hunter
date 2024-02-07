@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
@@ -108,9 +109,22 @@ public class GameStart extends Application {
         difficultyLayout.setAlignment(Pos.BOTTOM_CENTER);
         difficultyLayout.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
+        // Controls Label
+        Label controlsLabel = new Label("Controls:\n" +
+                "Up arrow / W = Move Up\n" +
+                "Left arrow / A = Move Left\n" +
+                "Right arrow / D = Move Right\n" +
+                "Down arrow / S = Move Down\n" +
+                "Space = Melee Attack\n" +
+                "Z = Projectile Attack\n" +
+                "Q = Pause");
+        controlsLabel.setFont(Font.font("Stencil", FontWeight.NORMAL, 14));
+        controlsLabel.setTextFill(Color.web("#FFFFFF"));
+        controlsLabel.setBackground(new Background(new BackgroundFill(Color.BLACK, new CornerRadii(5.0), Insets.EMPTY)));
+        controlsLabel.setPadding(new Insets(10));
 
         // Layout
-        VBox layout = new VBox(20, startButton, difficultyLayout, quitButton); // Increase spacing between buttons
+        VBox layout = new VBox(20, controlsLabel, startButton, difficultyLayout, quitButton); // Increase spacing between buttons
         layout.setAlignment(Pos.CENTER);
         layout.setBackground(background);
 

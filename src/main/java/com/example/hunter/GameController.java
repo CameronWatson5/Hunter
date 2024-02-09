@@ -70,10 +70,11 @@ public class GameController {
 
     private final int initialPlayerX = 400; // spawn location of player
     private final int initialPlayerY = 400; // spawn location of player
+
     private List<ScoreEntry> scoreList = new ArrayList<>(); // list of top 10 best scores.
     private boolean bossSpawned; // keeps track of if the boss is on the screen
     private long lastPauseTime = 0; // This stops someone accidentally pausing then unpausing instantly
-    private final Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is used so multiple buttons can be pressed
+    private final Set<KeyCode> keysPressed = new HashSet<>(); // HashSet is for responsive controls
     // This initialises the game and sets up all the necessary elements.
     public void initialize() {
         bossSpawned = false;
@@ -261,6 +262,7 @@ public class GameController {
                         lastSpawnTime = now;
                     }
                     updateGame();
+                    updateMovement();
                 }
             }
         };
@@ -427,21 +429,22 @@ public class GameController {
             return; // Ignore movement commands if the game is paused
         }
         if (player == null) return;
+        //System.out.println("updateMovement() called");
 
         double deltaX = 0;
         double deltaY = 0;
 
         if (keysPressed.contains(KeyCode.UP) || keysPressed.contains(KeyCode.W)) {
-            deltaY -= 10;
+            deltaY = -5;
         }
         if (keysPressed.contains(KeyCode.DOWN) || keysPressed.contains(KeyCode.S)) {
-            deltaY += 10;
+            deltaY = 5;
         }
         if (keysPressed.contains(KeyCode.LEFT) || keysPressed.contains(KeyCode.A)) {
-            deltaX -= 10;
+            deltaX = -5;
         }
         if (keysPressed.contains(KeyCode.RIGHT) || keysPressed.contains(KeyCode.D)) {
-            deltaX += 10;
+            deltaX = 5;
         }
 
         player.move(deltaX, deltaY);

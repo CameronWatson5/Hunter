@@ -318,10 +318,13 @@ public class Player {
     public void move(double dx, double dy) {
         if (dx > 0) {
             walkRight();
+
         } else if (dx < 0) {
             walkLeft();
+
         } else if (dy > 0) {
             walkDown();
+
         } else if (dy < 0) {
             walkUp();
         }

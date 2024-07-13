@@ -32,11 +32,10 @@ public class Dino extends Enemy {
         // load sprite sheets
         Image spriteSheet1 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino1.png")));
         Image spriteSheet2 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino2.png")));
-        Image spriteSheet3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino3.png")));
-        Image spriteSheet4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino4.png")));
-        Image spriteSheet5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino5.png")));
+        Image spriteSheet3 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/dino3.png")));
+        Image spriteSheet4 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/dino4.png")));
+        Image spriteSheet5 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/dino5.png")));
         Image spriteSheet6 = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/Dino6.png")));
-
         // Randomly select a sprite sheet
         Random random = new Random();
         int randomNumber = random.nextInt(6);
@@ -80,6 +79,7 @@ public class Dino extends Enemy {
         this.imageView.setLayoutY(this.y);
         isKnockedBack = false;
     }
+
     // The update method is a loop that keeps track of the enemy's state.
     @Override
     public void update(Player player) {

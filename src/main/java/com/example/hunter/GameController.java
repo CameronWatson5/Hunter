@@ -98,7 +98,7 @@ public class GameController {
         gameState = GameState.PLAYING;
         updateScoreDisplay();
         enemies = new ArrayList<>();
-        player = new Player(characterView, "/images/character1.png", this);
+        player = new Player(characterView, "images/character1.png", this);
 
         if (!gamePane.getChildren().contains(characterView)) {
             gamePane.getChildren().add(characterView);
@@ -545,7 +545,7 @@ public class GameController {
 
         // Update the age display label
         ageDisplayLabel.setText("Current Age: Stone Age");
-        updateBackgroundImage("/images/stoneAgeBackground.png");
+        updateBackgroundImage("images/stoneAgeBackground.png");
 
         gameState = GameState.PLAYING;
         gameLoop.start();

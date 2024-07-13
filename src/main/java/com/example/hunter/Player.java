@@ -55,7 +55,7 @@ public class Player {
         this.characterView = Objects.requireNonNull(characterView, "characterView cannot be null");
 
         // Load the main image
-        InputStream stream = getClass().getResourceAsStream(imagePath);
+        InputStream stream = getClass().getResourceAsStream("/" + imagePath);
         if (stream == null) {
             throw new IllegalArgumentException("Resource not found: " + imagePath);
         }
@@ -104,21 +104,32 @@ public class Player {
 
     // loads the sprite sheets for walking up, down, left, and right
     private void loadSpriteSheets() {
-        // In the constructor or a dedicated method
-        spriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/upWalkSpriteSheet.png")));
-        spriteSheetDown = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/downWalkspriteSheet.png")));
-        spriteSheetLeft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/leftWalkspriteSheet.png")));
-        spriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/rightWalkSpriteSheet.png")));
+        spriteSheetUp = loadImage("images/upWalkSpriteSheet.png");
+        spriteSheetDown = loadImage("images/downWalkSpriteSheet.png");
+        spriteSheetLeft = loadImage("images/leftWalkSpriteSheet.png");
+        spriteSheetRight = loadImage("images/rightWalkSpriteSheet.png");
     }
+
+
+    private Image loadImage(String path) {
+        InputStream stream = getClass().getResourceAsStream("/" + path);
+        if (stream == null) {
+            System.err.println("Resource not found: " + path);
+            return null;
+        }
+        return new Image(stream);
+    }
+
 
     // loads the sprite sheets for attacking up, down, left, and right
     private void loadAttackSpriteSheets() {
-        weaponSpriteSheet = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/swordSpriteSheet.png")));
-        attackSpriteSheetUp = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackUpSpriteSheet.png")));
-        attackSpriteSheetDown = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackDownSpriteSheet.png")));
-        attackSpriteSheetLeft = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackLeftSpriteSheet.png")));
-        attackSpriteSheetRight = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/attackRightSpriteSheet.png")));
+        weaponSpriteSheet = loadImage("images/swordSpriteSheet.png");
+        attackSpriteSheetUp = loadImage("images/attackUpSpriteSheet.png");
+        attackSpriteSheetDown = loadImage("images/attackDownSpriteSheet.png");
+        attackSpriteSheetLeft = loadImage("images/attackLeftSpriteSheet.png");
+        attackSpriteSheetRight = loadImage("images/attackRightSpriteSheet.png");
     }
+
 
     // fires a rock projectile, has a 0.5 second cooldown.
     public void fireProjectile() {
@@ -304,15 +315,15 @@ public class Player {
     private void setupStandingAnimation() {
         InputStream stream = getClass().getResourceAsStream("/images/downWalkSpriteSheet.png");
         if (stream == null) {
-            throw new IllegalArgumentException("Resource not found: /images/downWalkSpriteSheet.png");
+            throw new IllegalArgumentException("Resource not found: images/downWalkSpriteSheet.png");
         }
         Image standingSpriteSheet = new Image(stream);
-
         final int numberOfFrames = 2;
         final Duration frameTime = Duration.millis(200);
 
         setupAnimation(standingSpriteSheet, numberOfFrames, frameTime, true);
     }
+
 
     // Used for player movement
     public void move(double dx, double dy) {
@@ -468,10 +479,14 @@ public class Player {
     public void standStill() {
         if (currentDirection != Direction.STANDING) {
             currentDirection = Direction.STANDING;
-            characterView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/standingSpriteSheet.png"))));
-            setupStandingAnimation();
+            Image standingImage = loadImage("images/standingSpriteSheet.png");
+            if (standingImage != null) {
+                characterView.setImage(standingImage);
+                setupStandingAnimation();
+            }
         }
     }
+
     public void playSwooshSound() {
         try {
             // Adjust the path to where your sound file is located
@@ -489,6 +504,7 @@ public class Player {
             System.err.println("Error playing the sound.");
         }
     }
+
     // Method to play rock sound
     public void playRockSound() {
         try {
